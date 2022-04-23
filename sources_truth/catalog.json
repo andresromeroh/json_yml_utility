@@ -1,0 +1,3459 @@
+{
+    "metadata": {
+        "dbt_schema_version": "https://schemas.getdbt.com/dbt/catalog/v1.json",
+        "dbt_version": "1.0.4",
+        "generated_at": "2022-04-18T13:00:27.290595Z",
+        "invocation_id": "d66052ab-72e4-4309-8db1-b22acc056af7",
+        "env": {}
+    },
+    "nodes": {
+        "model.hrdm_ingest.feedback_employee_ptl_snapshot": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "MASTER_FEEDBACK",
+                "name": "FEEDBACK_EMPLOYEE_PTL_SNAPSHOT",
+                "database": "HR_SOURCE_DEV",
+                "comment": null,
+                "owner": "_DB_HR_SOURCE_DEV_OWN"
+            },
+            "columns": {
+                "EMPLOYEE_PTL_SNAPSHOT_KEY": {
+                    "type": "TEXT",
+                    "index": 1,
+                    "name": "EMPLOYEE_PTL_SNAPSHOT_KEY",
+                    "comment": null
+                },
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 2,
+                    "name": "ID",
+                    "comment": null
+                },
+                "SNAPSHOT_DATE": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 3,
+                    "name": "SNAPSHOT_DATE",
+                    "comment": null
+                },
+                "PTL_SCORE": {
+                    "type": "FLOAT",
+                    "index": 4,
+                    "name": "PTL_SCORE",
+                    "comment": null
+                },
+                "IS_RECORDED": {
+                    "type": "BOOLEAN",
+                    "index": 5,
+                    "name": "IS_RECORDED",
+                    "comment": null
+                },
+                "AUTHOR_EMPLOYEE_ID": {
+                    "type": "NUMBER",
+                    "index": 6,
+                    "name": "AUTHOR_EMPLOYEE_ID",
+                    "comment": null
+                },
+                "CURRENT_JOB_PROFILE_ID": {
+                    "type": "NUMBER",
+                    "index": 7,
+                    "name": "CURRENT_JOB_PROFILE_ID",
+                    "comment": null
+                },
+                "EMPLOYEE_ID": {
+                    "type": "NUMBER",
+                    "index": 8,
+                    "name": "EMPLOYEE_ID",
+                    "comment": null
+                },
+                "ROUND_ID": {
+                    "type": "NUMBER",
+                    "index": 9,
+                    "name": "ROUND_ID",
+                    "comment": null
+                },
+                "CREATED_ON": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 10,
+                    "name": "CREATED_ON",
+                    "comment": null
+                },
+                "ETL_UPDATED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 11,
+                    "name": "ETL_UPDATED_TIMESTAMP",
+                    "comment": null
+                },
+                "IS_DELETED_IN_SOURCE": {
+                    "type": "BOOLEAN",
+                    "index": 12,
+                    "name": "IS_DELETED_IN_SOURCE",
+                    "comment": null
+                },
+                "TIMESTAMP_EFFECTIVE": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 13,
+                    "name": "TIMESTAMP_EFFECTIVE",
+                    "comment": null
+                },
+                "ROW_HASH": {
+                    "type": "NUMBER",
+                    "index": 14,
+                    "name": "ROW_HASH",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 62063616.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 1000110.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-11 16:14UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "model.hrdm_ingest.feedback_employee_ptl_snapshot"
+        },
+        "model.hrdm_ingest.feedback_form_builder_form": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "MASTER_FEEDBACK",
+                "name": "FEEDBACK_FORM_BUILDER_FORM",
+                "database": "HR_SOURCE_DEV",
+                "comment": null,
+                "owner": "_DB_HR_SOURCE_DEV_OWN"
+            },
+            "columns": {
+                "FORM_BUILDER_FORM_KEY": {
+                    "type": "TEXT",
+                    "index": 1,
+                    "name": "FORM_BUILDER_FORM_KEY",
+                    "comment": null
+                },
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 2,
+                    "name": "ID",
+                    "comment": null
+                },
+                "NAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "NAME",
+                    "comment": null
+                },
+                "TYPE": {
+                    "type": "NUMBER",
+                    "index": 4,
+                    "name": "TYPE",
+                    "comment": null
+                },
+                "STATUS": {
+                    "type": "NUMBER",
+                    "index": 5,
+                    "name": "STATUS",
+                    "comment": null
+                },
+                "CREATED_ON": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 6,
+                    "name": "CREATED_ON",
+                    "comment": null
+                },
+                "IS_DELETED": {
+                    "type": "BOOLEAN",
+                    "index": 7,
+                    "name": "IS_DELETED",
+                    "comment": null
+                },
+                "FORM_STRUCTURE": {
+                    "type": "VARIANT",
+                    "index": 8,
+                    "name": "FORM_STRUCTURE",
+                    "comment": null
+                },
+                "META": {
+                    "type": "VARIANT",
+                    "index": 9,
+                    "name": "META",
+                    "comment": null
+                },
+                "LAST_MODIFIED_BY": {
+                    "type": "TEXT",
+                    "index": 10,
+                    "name": "LAST_MODIFIED_BY",
+                    "comment": null
+                },
+                "CREATED_BY_ID": {
+                    "type": "NUMBER",
+                    "index": 11,
+                    "name": "CREATED_BY_ID",
+                    "comment": null
+                },
+                "IS_ARCHIVED": {
+                    "type": "BOOLEAN",
+                    "index": 12,
+                    "name": "IS_ARCHIVED",
+                    "comment": null
+                },
+                "MODIFIED_BY_ID": {
+                    "type": "NUMBER",
+                    "index": 13,
+                    "name": "MODIFIED_BY_ID",
+                    "comment": null
+                },
+                "MODIFIED_ON": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 14,
+                    "name": "MODIFIED_ON",
+                    "comment": null
+                },
+                "ETL_UPDATED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 15,
+                    "name": "ETL_UPDATED_TIMESTAMP",
+                    "comment": null
+                },
+                "IS_DELETED_IN_SOURCE": {
+                    "type": "BOOLEAN",
+                    "index": 16,
+                    "name": "IS_DELETED_IN_SOURCE",
+                    "comment": null
+                },
+                "TIMESTAMP_EFFECTIVE": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 17,
+                    "name": "TIMESTAMP_EFFECTIVE",
+                    "comment": null
+                },
+                "ROW_HASH": {
+                    "type": "NUMBER",
+                    "index": 18,
+                    "name": "ROW_HASH",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 901632.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 44.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-11 16:14UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "model.hrdm_ingest.feedback_form_builder_form"
+        },
+        "model.hrdm_ingest.feedback_function": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "MASTER_FEEDBACK",
+                "name": "FEEDBACK_FUNCTION",
+                "database": "HR_SOURCE_DEV",
+                "comment": null,
+                "owner": "_DB_HR_SOURCE_DEV_OWN"
+            },
+            "columns": {
+                "FUNCTION_KEY": {
+                    "type": "TEXT",
+                    "index": 1,
+                    "name": "FUNCTION_KEY",
+                    "comment": null
+                },
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 2,
+                    "name": "ID",
+                    "comment": null
+                },
+                "NAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "NAME",
+                    "comment": null
+                },
+                "ORGANIZATION_ID": {
+                    "type": "NUMBER",
+                    "index": 4,
+                    "name": "ORGANIZATION_ID",
+                    "comment": null
+                },
+                "IS_ARCHIVED": {
+                    "type": "BOOLEAN",
+                    "index": 5,
+                    "name": "IS_ARCHIVED",
+                    "comment": null
+                },
+                "ETL_UPDATED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 6,
+                    "name": "ETL_UPDATED_TIMESTAMP",
+                    "comment": null
+                },
+                "IS_DELETED_IN_SOURCE": {
+                    "type": "BOOLEAN",
+                    "index": 7,
+                    "name": "IS_DELETED_IN_SOURCE",
+                    "comment": null
+                },
+                "TIMESTAMP_EFFECTIVE": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 8,
+                    "name": "TIMESTAMP_EFFECTIVE",
+                    "comment": null
+                },
+                "ROW_HASH": {
+                    "type": "NUMBER",
+                    "index": 9,
+                    "name": "ROW_HASH",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 68096.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 237.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-11 16:14UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "model.hrdm_ingest.feedback_function"
+        },
+        "model.hrdm_ingest.feedback_level": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "MASTER_FEEDBACK",
+                "name": "FEEDBACK_LEVEL",
+                "database": "HR_SOURCE_DEV",
+                "comment": null,
+                "owner": "_DB_HR_SOURCE_DEV_OWN"
+            },
+            "columns": {
+                "LEVEL_KEY": {
+                    "type": "TEXT",
+                    "index": 1,
+                    "name": "LEVEL_KEY",
+                    "comment": null
+                },
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 2,
+                    "name": "ID",
+                    "comment": null
+                },
+                "NAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "NAME",
+                    "comment": null
+                },
+                "DESCRIPTION": {
+                    "type": "TEXT",
+                    "index": 4,
+                    "name": "DESCRIPTION",
+                    "comment": null
+                },
+                "RUBRIC_ID": {
+                    "type": "NUMBER",
+                    "index": 5,
+                    "name": "RUBRIC_ID",
+                    "comment": null
+                },
+                "SEQ": {
+                    "type": "NUMBER",
+                    "index": 6,
+                    "name": "SEQ",
+                    "comment": null
+                },
+                "IS_SPECIFIED": {
+                    "type": "BOOLEAN",
+                    "index": 7,
+                    "name": "IS_SPECIFIED",
+                    "comment": null
+                },
+                "ETL_UPDATED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 8,
+                    "name": "ETL_UPDATED_TIMESTAMP",
+                    "comment": null
+                },
+                "IS_DELETED_IN_SOURCE": {
+                    "type": "BOOLEAN",
+                    "index": 9,
+                    "name": "IS_DELETED_IN_SOURCE",
+                    "comment": null
+                },
+                "TIMESTAMP_EFFECTIVE": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 10,
+                    "name": "TIMESTAMP_EFFECTIVE",
+                    "comment": null
+                },
+                "ROW_HASH": {
+                    "type": "NUMBER",
+                    "index": 11,
+                    "name": "ROW_HASH",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 145920.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 1508.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-11 16:14UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "model.hrdm_ingest.feedback_level"
+        },
+        "model.hrdm_ingest.feedback_organization": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "MASTER_FEEDBACK",
+                "name": "FEEDBACK_ORGANIZATION",
+                "database": "HR_SOURCE_DEV",
+                "comment": null,
+                "owner": "_DB_HR_SOURCE_DEV_OWN"
+            },
+            "columns": {
+                "ORGANIZATION_KEY": {
+                    "type": "TEXT",
+                    "index": 1,
+                    "name": "ORGANIZATION_KEY",
+                    "comment": null
+                },
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 2,
+                    "name": "ID",
+                    "comment": null
+                },
+                "NAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "NAME",
+                    "comment": null
+                },
+                "FEEDBACK_REQUEST_TEMPLATE_ID": {
+                    "type": "NUMBER",
+                    "index": 4,
+                    "name": "FEEDBACK_REQUEST_TEMPLATE_ID",
+                    "comment": null
+                },
+                "FEEDBACK_REMINDER_TEMPLATE_ID": {
+                    "type": "NUMBER",
+                    "index": 5,
+                    "name": "FEEDBACK_REMINDER_TEMPLATE_ID",
+                    "comment": null
+                },
+                "PEERFEEDBACK_FORM": {
+                    "type": "TEXT",
+                    "index": 6,
+                    "name": "PEERFEEDBACK_FORM",
+                    "comment": null
+                },
+                "REVIEW_FORM": {
+                    "type": "TEXT",
+                    "index": 7,
+                    "name": "REVIEW_FORM",
+                    "comment": null
+                },
+                "SELFEVAL_FORM": {
+                    "type": "TEXT",
+                    "index": 8,
+                    "name": "SELFEVAL_FORM",
+                    "comment": null
+                },
+                "UPWARD_FEEDBACK_RUBRIC": {
+                    "type": "TEXT",
+                    "index": 9,
+                    "name": "UPWARD_FEEDBACK_RUBRIC",
+                    "comment": null
+                },
+                "HIDE_ROLE": {
+                    "type": "BOOLEAN",
+                    "index": 10,
+                    "name": "HIDE_ROLE",
+                    "comment": null
+                },
+                "HIDE_OVERALL_RATING": {
+                    "type": "BOOLEAN",
+                    "index": 11,
+                    "name": "HIDE_OVERALL_RATING",
+                    "comment": null
+                },
+                "HIDE_SELFEVAL_RATING_UNTIL_LOCKED": {
+                    "type": "BOOLEAN",
+                    "index": 12,
+                    "name": "HIDE_SELFEVAL_RATING_UNTIL_LOCKED",
+                    "comment": null
+                },
+                "UPWARD_FEEDBACK_RUBRIC_ID": {
+                    "type": "NUMBER",
+                    "index": 13,
+                    "name": "UPWARD_FEEDBACK_RUBRIC_ID",
+                    "comment": null
+                },
+                "REVEAL_RATING": {
+                    "type": "BOOLEAN",
+                    "index": 14,
+                    "name": "REVEAL_RATING",
+                    "comment": null
+                },
+                "ANYTIME_FEEDBACK_RUBRIC_ID": {
+                    "type": "BOOLEAN",
+                    "index": 15,
+                    "name": "ANYTIME_FEEDBACK_RUBRIC_ID",
+                    "comment": null
+                },
+                "IS_PEER_FEEDBACK_ATTRIBUTED": {
+                    "type": "BOOLEAN",
+                    "index": 16,
+                    "name": "IS_PEER_FEEDBACK_ATTRIBUTED",
+                    "comment": null
+                },
+                "SHOW_PEER_FEEDBACK_RATINGS": {
+                    "type": "BOOLEAN",
+                    "index": 17,
+                    "name": "SHOW_PEER_FEEDBACK_RATINGS",
+                    "comment": null
+                },
+                "AUTO_SHARE_PEER_FEEDBACK": {
+                    "type": "BOOLEAN",
+                    "index": 18,
+                    "name": "AUTO_SHARE_PEER_FEEDBACK",
+                    "comment": null
+                },
+                "HIDE_SELFEVAL_AND_PEERFEEDBACK_ON_REVIEW": {
+                    "type": "BOOLEAN",
+                    "index": 19,
+                    "name": "HIDE_SELFEVAL_AND_PEERFEEDBACK_ON_REVIEW",
+                    "comment": null
+                },
+                "SHOW_AWARDS_PAGE": {
+                    "type": "BOOLEAN",
+                    "index": 20,
+                    "name": "SHOW_AWARDS_PAGE",
+                    "comment": null
+                },
+                "SHOW_PRIVATE_FEEDBACK_IN_CALIBRATION": {
+                    "type": "BOOLEAN",
+                    "index": 21,
+                    "name": "SHOW_PRIVATE_FEEDBACK_IN_CALIBRATION",
+                    "comment": null
+                },
+                "HIDE_PREVIOUS_QUARTER_REVIEW": {
+                    "type": "BOOLEAN",
+                    "index": 22,
+                    "name": "HIDE_PREVIOUS_QUARTER_REVIEW",
+                    "comment": null
+                },
+                "ETL_UPDATED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 23,
+                    "name": "ETL_UPDATED_TIMESTAMP",
+                    "comment": null
+                },
+                "IS_DELETED_IN_SOURCE": {
+                    "type": "BOOLEAN",
+                    "index": 24,
+                    "name": "IS_DELETED_IN_SOURCE",
+                    "comment": null
+                },
+                "TIMESTAMP_EFFECTIVE": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 25,
+                    "name": "TIMESTAMP_EFFECTIVE",
+                    "comment": null
+                },
+                "ROW_HASH": {
+                    "type": "NUMBER",
+                    "index": 26,
+                    "name": "ROW_HASH",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 47616.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 22.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-11 16:14UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "model.hrdm_ingest.feedback_organization"
+        },
+        "model.hrdm_ingest.feedback_role": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "MASTER_FEEDBACK",
+                "name": "FEEDBACK_ROLE",
+                "database": "HR_SOURCE_DEV",
+                "comment": null,
+                "owner": "_DB_HR_SOURCE_DEV_OWN"
+            },
+            "columns": {
+                "ROLE_KEY": {
+                    "type": "TEXT",
+                    "index": 1,
+                    "name": "ROLE_KEY",
+                    "comment": null
+                },
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 2,
+                    "name": "ID",
+                    "comment": null
+                },
+                "NAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "NAME",
+                    "comment": null
+                },
+                "SEQ": {
+                    "type": "NUMBER",
+                    "index": 4,
+                    "name": "SEQ",
+                    "comment": null
+                },
+                "RANK": {
+                    "type": "NUMBER",
+                    "index": 5,
+                    "name": "RANK",
+                    "comment": null
+                },
+                "IS_SPECIFIED": {
+                    "type": "BOOLEAN",
+                    "index": 6,
+                    "name": "IS_SPECIFIED",
+                    "comment": null
+                },
+                "FUNCTION_ID": {
+                    "type": "NUMBER",
+                    "index": 7,
+                    "name": "FUNCTION_ID",
+                    "comment": null
+                },
+                "LEVEL_ID": {
+                    "type": "NUMBER",
+                    "index": 8,
+                    "name": "LEVEL_ID",
+                    "comment": null
+                },
+                "ETL_UPDATED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 9,
+                    "name": "ETL_UPDATED_TIMESTAMP",
+                    "comment": null
+                },
+                "IS_DELETED_IN_SOURCE": {
+                    "type": "BOOLEAN",
+                    "index": 10,
+                    "name": "IS_DELETED_IN_SOURCE",
+                    "comment": null
+                },
+                "TIMESTAMP_EFFECTIVE": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 11,
+                    "name": "TIMESTAMP_EFFECTIVE",
+                    "comment": null
+                },
+                "ROW_HASH": {
+                    "type": "NUMBER",
+                    "index": 12,
+                    "name": "ROW_HASH",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 148992.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 1341.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-11 16:14UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "model.hrdm_ingest.feedback_role"
+        },
+        "model.hrdm_ingest.feedback_round": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "MASTER_FEEDBACK",
+                "name": "FEEDBACK_ROUND",
+                "database": "HR_SOURCE_DEV",
+                "comment": null,
+                "owner": "_DB_HR_SOURCE_DEV_OWN"
+            },
+            "columns": {
+                "ROUND_KEY": {
+                    "type": "TEXT",
+                    "index": 1,
+                    "name": "ROUND_KEY",
+                    "comment": null
+                },
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 2,
+                    "name": "ID",
+                    "comment": null
+                },
+                "NAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "NAME",
+                    "comment": null
+                },
+                "SLUG": {
+                    "type": "TEXT",
+                    "index": 4,
+                    "name": "SLUG",
+                    "comment": null
+                },
+                "CREATED_DATE": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 5,
+                    "name": "CREATED_DATE",
+                    "comment": null
+                },
+                "LAST_UPDATED_DATE": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 6,
+                    "name": "LAST_UPDATED_DATE",
+                    "comment": null
+                },
+                "PEER_FEEDBACK_DUE_DATE": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 7,
+                    "name": "PEER_FEEDBACK_DUE_DATE",
+                    "comment": null
+                },
+                "REVIEWS_DUE_DATE": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 8,
+                    "name": "REVIEWS_DUE_DATE",
+                    "comment": null
+                },
+                "SELF_EVALS_DUE_DATE": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 9,
+                    "name": "SELF_EVALS_DUE_DATE",
+                    "comment": null
+                },
+                "IS_LOCKED": {
+                    "type": "NUMBER",
+                    "index": 10,
+                    "name": "IS_LOCKED",
+                    "comment": null
+                },
+                "ETL_UPDATED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 11,
+                    "name": "ETL_UPDATED_TIMESTAMP",
+                    "comment": null
+                },
+                "IS_DELETED_IN_SOURCE": {
+                    "type": "BOOLEAN",
+                    "index": 12,
+                    "name": "IS_DELETED_IN_SOURCE",
+                    "comment": null
+                },
+                "TIMESTAMP_EFFECTIVE": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 13,
+                    "name": "TIMESTAMP_EFFECTIVE",
+                    "comment": null
+                },
+                "ROW_HASH": {
+                    "type": "NUMBER",
+                    "index": 14,
+                    "name": "ROW_HASH",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 40448.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 28.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-11 16:14UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "model.hrdm_ingest.feedback_round"
+        },
+        "model.hrdm_ingest.feedback_rubric": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "MASTER_FEEDBACK",
+                "name": "FEEDBACK_RUBRIC",
+                "database": "HR_SOURCE_DEV",
+                "comment": null,
+                "owner": "_DB_HR_SOURCE_DEV_OWN"
+            },
+            "columns": {
+                "RUBRIC_KEY": {
+                    "type": "TEXT",
+                    "index": 1,
+                    "name": "RUBRIC_KEY",
+                    "comment": null
+                },
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 2,
+                    "name": "ID",
+                    "comment": null
+                },
+                "NAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "NAME",
+                    "comment": null
+                },
+                "ETL_UPDATED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 4,
+                    "name": "ETL_UPDATED_TIMESTAMP",
+                    "comment": null
+                },
+                "IS_DELETED_IN_SOURCE": {
+                    "type": "BOOLEAN",
+                    "index": 5,
+                    "name": "IS_DELETED_IN_SOURCE",
+                    "comment": null
+                },
+                "TIMESTAMP_EFFECTIVE": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 6,
+                    "name": "TIMESTAMP_EFFECTIVE",
+                    "comment": null
+                },
+                "ROW_HASH": {
+                    "type": "NUMBER",
+                    "index": 7,
+                    "name": "ROW_HASH",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 66560.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 361.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-11 16:14UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "model.hrdm_ingest.feedback_rubric"
+        },
+        "model.hrdm_ingest.workday_job_profiles": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "MASTER_WORKDAY",
+                "name": "WORKDAY_JOB_PROFILES",
+                "database": "HR_SOURCE_DEV",
+                "comment": null,
+                "owner": "_DB_HR_SOURCE_DEV_OWN"
+            },
+            "columns": {
+                "JOB_PROFILES_KEY": {
+                    "type": "TEXT",
+                    "index": 1,
+                    "name": "JOB_PROFILES_KEY",
+                    "comment": null
+                },
+                "WORKDAY_ID": {
+                    "type": "TEXT",
+                    "index": 2,
+                    "name": "WORKDAY_ID",
+                    "comment": null
+                },
+                "COMPENSATION_GRADE_HIERARCHY": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "COMPENSATION_GRADE_HIERARCHY",
+                    "comment": null
+                },
+                "JOB_PROFILE_NAME": {
+                    "type": "TEXT",
+                    "index": 4,
+                    "name": "JOB_PROFILE_NAME",
+                    "comment": null
+                },
+                "DATE_EFFECTIVE": {
+                    "type": "DATE",
+                    "index": 5,
+                    "name": "DATE_EFFECTIVE",
+                    "comment": null
+                },
+                "COMPENSATION_GRADE": {
+                    "type": "TEXT",
+                    "index": 6,
+                    "name": "COMPENSATION_GRADE",
+                    "comment": null
+                },
+                "REFERENCE_ID": {
+                    "type": "TEXT",
+                    "index": 7,
+                    "name": "REFERENCE_ID",
+                    "comment": null
+                },
+                "JOB_CLASSIFICATIONS_GROUP": {
+                    "type": "TEXT",
+                    "index": 8,
+                    "name": "JOB_CLASSIFICATIONS_GROUP",
+                    "comment": null
+                },
+                "JOB_FAMILIES_ON_JOB_PROFILE_GROUP": {
+                    "type": "TEXT",
+                    "index": 9,
+                    "name": "JOB_FAMILIES_ON_JOB_PROFILE_GROUP",
+                    "comment": null
+                },
+                "IS_DELETED": {
+                    "type": "BOOLEAN",
+                    "index": 10,
+                    "name": "IS_DELETED",
+                    "comment": null
+                },
+                "ROW_HASH": {
+                    "type": "NUMBER",
+                    "index": 11,
+                    "name": "ROW_HASH",
+                    "comment": null
+                },
+                "ETL_UPDATED_TIMESTAMP": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 12,
+                    "name": "ETL_UPDATED_TIMESTAMP",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 0.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 0.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-02-14 22:26UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "model.hrdm_ingest.workday_job_profiles"
+        },
+        "model.hrdm_ingest.feedback_dimension": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "MASTER_FEEDBACK",
+                "name": "FEEDBACK_DIMENSION",
+                "database": "HR_SOURCE_DEV",
+                "comment": null,
+                "owner": "_DB_HR_SOURCE_DEV_OWN"
+            },
+            "columns": {
+                "DIMENSION_KEY": {
+                    "type": "TEXT",
+                    "index": 1,
+                    "name": "DIMENSION_KEY",
+                    "comment": null
+                },
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 2,
+                    "name": "ID",
+                    "comment": null
+                },
+                "NAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "NAME",
+                    "comment": null
+                },
+                "DESCRIPTION": {
+                    "type": "TEXT",
+                    "index": 4,
+                    "name": "DESCRIPTION",
+                    "comment": null
+                },
+                "RUBRIC_ID": {
+                    "type": "NUMBER",
+                    "index": 5,
+                    "name": "RUBRIC_ID",
+                    "comment": null
+                },
+                "SEQ": {
+                    "type": "NUMBER",
+                    "index": 6,
+                    "name": "SEQ",
+                    "comment": null
+                },
+                "IS_RATING_FIELD": {
+                    "type": "BOOLEAN",
+                    "index": 7,
+                    "name": "IS_RATING_FIELD",
+                    "comment": null
+                },
+                "ETL_UPDATED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 8,
+                    "name": "ETL_UPDATED_TIMESTAMP",
+                    "comment": null
+                },
+                "IS_DELETED_IN_SOURCE": {
+                    "type": "BOOLEAN",
+                    "index": 9,
+                    "name": "IS_DELETED_IN_SOURCE",
+                    "comment": null
+                },
+                "TIMESTAMP_EFFECTIVE": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 10,
+                    "name": "TIMESTAMP_EFFECTIVE",
+                    "comment": null
+                },
+                "ROW_HASH": {
+                    "type": "NUMBER",
+                    "index": 11,
+                    "name": "ROW_HASH",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 193024.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 1872.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-11 16:14UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "model.hrdm_ingest.feedback_dimension"
+        }
+    },
+    "sources": {
+        "source.hrdm_ingest.icims_raw.connecteventworkflowsource": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "ICIMS",
+                "name": "CONNECTEVENTWORKFLOWSOURCE",
+                "database": "HR_RAW_QA",
+                "comment": "RAW TABLE FOR ICIMS CONNECTEVENTWORKFLOWSOURCE",
+                "owner": "_DB_HR_RAW_QA_ICIMS_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 449024.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 4890.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-03-29 13:11UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.icims_raw.connecteventworkflowsource"
+        },
+        "source.hrdm_ingest.icims_raw.person": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "ICIMS",
+                "name": "PERSON",
+                "database": "HR_RAW_QA",
+                "comment": "RAW TABLE FOR ICIMS PERSON",
+                "owner": "_DB_HR_RAW_QA_ICIMS_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 1644575744.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 208039.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-02 01:41UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.icims_raw.person"
+        },
+        "source.hrdm_ingest.icims_raw.room": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "ICIMS",
+                "name": "ROOM",
+                "database": "HR_RAW_QA",
+                "comment": "RAW TABLE FOR ICIMS ROOM",
+                "owner": "_DB_HR_RAW_QA_ICIMS_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 108032.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 473.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-03-29 04:57UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.icims_raw.room"
+        },
+        "source.hrdm_ingest.icims_raw.connecteventworkflow": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "ICIMS",
+                "name": "CONNECTEVENTWORKFLOW",
+                "database": "HR_RAW_QA",
+                "comment": "RAW TABLE FOR ICIMS CONNECTEVENTWORKFLOW",
+                "owner": "_DB_HR_RAW_QA_ICIMS_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 337408.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 2306.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-03-29 07:54UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.icims_raw.connecteventworkflow"
+        },
+        "source.hrdm_ingest.icims_raw.submittal": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "ICIMS",
+                "name": "SUBMITTAL",
+                "database": "HR_RAW_QA",
+                "comment": "RAW TABLE FOR ICIMS SUBMITTAL",
+                "owner": "_DB_HR_RAW_QA_ICIMS_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 49943552.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 160427.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-03-29 15:41UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.icims_raw.submittal"
+        },
+        "source.hrdm_ingest.icims_raw.talentpool": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "ICIMS",
+                "name": "TALENTPOOL",
+                "database": "HR_RAW_QA",
+                "comment": "RAW TABLE FOR ICIMS TALENTPOOL",
+                "owner": "_DB_HR_RAW_QA_ICIMS_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 99840.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 189.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-03-28 22:11UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.icims_raw.talentpool"
+        },
+        "source.hrdm_ingest.icims_raw.connectevent": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "ICIMS",
+                "name": "CONNECTEVENT",
+                "database": "HR_RAW_QA",
+                "comment": "RAW TABLE FOR ICIMS CONNECTEVENT",
+                "owner": "_DB_HR_RAW_QA_ICIMS_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 222208.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 193.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-03-29 02:06UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.icims_raw.connectevent"
+        },
+        "source.hrdm_ingest.icims_raw.company": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "ICIMS",
+                "name": "COMPANY",
+                "database": "HR_RAW_QA",
+                "comment": "RAW TABLE FOR ICIMS COMPANY",
+                "owner": "_DB_HR_RAW_QA_ICIMS_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 2404352.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 14023.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-03-29 13:48UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.icims_raw.company"
+        },
+        "source.hrdm_ingest.icims_raw.sourceworkflow": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "ICIMS",
+                "name": "SOURCEWORKFLOW",
+                "database": "HR_RAW_QA",
+                "comment": "RAW TABLE FOR ICIMS SOURCEWORKFLOW",
+                "owner": "_DB_HR_RAW_QA_ICIMS_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 3189248.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 3609.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-03-29 14:18UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.icims_raw.sourceworkflow"
+        },
+        "source.hrdm_ingest.workday_raw.workday_transactions": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "WORKDAY",
+                "name": "WORKDAY_TRANSACTIONS",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_WORKDAY_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 0.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 0.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-13 16:42UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.workday_raw.workday_transactions"
+        },
+        "source.hrdm_ingest.workday_raw.workday_suppliers": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "WORKDAY",
+                "name": "WORKDAY_SUPPLIERS",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_WORKDAY_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 0.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 0.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-13 16:40UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.workday_raw.workday_suppliers"
+        },
+        "source.hrdm_ingest.workday_raw.workday_job_profiles": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "WORKDAY",
+                "name": "WORKDAY_JOB_PROFILES",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_WORKDAY_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 0.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 0.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-14 16:06UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.workday_raw.workday_job_profiles"
+        },
+        "source.hrdm_ingest.workday_raw.workday_custom_organizations": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "WORKDAY",
+                "name": "WORKDAY_CUSTOM_ORGANIZATIONS",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_WORKDAY_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 0.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 0.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-14 16:06UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.workday_raw.workday_custom_organizations"
+        },
+        "source.hrdm_ingest.workday_raw.workday_companies": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "WORKDAY",
+                "name": "WORKDAY_COMPANIES",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_WORKDAY_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 0.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 0.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-14 16:06UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.workday_raw.workday_companies"
+        },
+        "source.hrdm_ingest.feedback_raw.form_builder_form_history": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "FEEDBACK",
+                "name": "FORM_BUILDER_FORM_HISTORY",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_FEEDBACK_OWN"
+            },
+            "columns": {
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 1,
+                    "name": "ID",
+                    "comment": null
+                },
+                "NAME": {
+                    "type": "TEXT",
+                    "index": 2,
+                    "name": "NAME",
+                    "comment": null
+                },
+                "TYPE": {
+                    "type": "NUMBER",
+                    "index": 3,
+                    "name": "TYPE",
+                    "comment": null
+                },
+                "STATUS": {
+                    "type": "NUMBER",
+                    "index": 4,
+                    "name": "STATUS",
+                    "comment": null
+                },
+                "CREATED_ON": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 5,
+                    "name": "CREATED_ON",
+                    "comment": null
+                },
+                "IS_DELETED": {
+                    "type": "NUMBER",
+                    "index": 6,
+                    "name": "IS_DELETED",
+                    "comment": null
+                },
+                "FORM_STRUCTURE": {
+                    "type": "TEXT",
+                    "index": 7,
+                    "name": "FORM_STRUCTURE",
+                    "comment": null
+                },
+                "META": {
+                    "type": "TEXT",
+                    "index": 8,
+                    "name": "META",
+                    "comment": null
+                },
+                "CREATED_BY_ID": {
+                    "type": "NUMBER",
+                    "index": 9,
+                    "name": "CREATED_BY_ID",
+                    "comment": null
+                },
+                "IS_ARCHIVED": {
+                    "type": "NUMBER",
+                    "index": 10,
+                    "name": "IS_ARCHIVED",
+                    "comment": null
+                },
+                "MODIFIED_BY_ID": {
+                    "type": "NUMBER",
+                    "index": 11,
+                    "name": "MODIFIED_BY_ID",
+                    "comment": null
+                },
+                "MODIFIED_ON": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 12,
+                    "name": "MODIFIED_ON",
+                    "comment": null
+                },
+                "_H2_SF_INSERTED": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 13,
+                    "name": "_H2_SF_INSERTED",
+                    "comment": null
+                },
+                "_H2_IS_DELETED": {
+                    "type": "BOOLEAN",
+                    "index": 14,
+                    "name": "_H2_IS_DELETED",
+                    "comment": null
+                },
+                "_H2_BINLOG_TS_MS": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 15,
+                    "name": "_H2_BINLOG_TS_MS",
+                    "comment": null
+                },
+                "_H2_BINLOG_POS": {
+                    "type": "NUMBER",
+                    "index": 16,
+                    "name": "_H2_BINLOG_POS",
+                    "comment": null
+                },
+                "_H2_BINLOG_FILE": {
+                    "type": "TEXT",
+                    "index": 17,
+                    "name": "_H2_BINLOG_FILE",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 131584.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 44.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-08 20:20UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.feedback_raw.form_builder_form_history"
+        },
+        "source.hrdm_ingest.feedback_raw.ckapp_function_history": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "FEEDBACK",
+                "name": "CKAPP_FUNCTION_HISTORY",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_FEEDBACK_OWN"
+            },
+            "columns": {
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 1,
+                    "name": "ID",
+                    "comment": null
+                },
+                "NAME": {
+                    "type": "TEXT",
+                    "index": 2,
+                    "name": "NAME",
+                    "comment": null
+                },
+                "ORGANIZATION_ID": {
+                    "type": "NUMBER",
+                    "index": 3,
+                    "name": "ORGANIZATION_ID",
+                    "comment": null
+                },
+                "IS_ARCHIVED": {
+                    "type": "NUMBER",
+                    "index": 4,
+                    "name": "IS_ARCHIVED",
+                    "comment": null
+                },
+                "_H2_SF_INSERTED": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 5,
+                    "name": "_H2_SF_INSERTED",
+                    "comment": null
+                },
+                "_H2_IS_DELETED": {
+                    "type": "BOOLEAN",
+                    "index": 6,
+                    "name": "_H2_IS_DELETED",
+                    "comment": null
+                },
+                "_H2_BINLOG_TS_MS": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 7,
+                    "name": "_H2_BINLOG_TS_MS",
+                    "comment": null
+                },
+                "_H2_BINLOG_POS": {
+                    "type": "NUMBER",
+                    "index": 8,
+                    "name": "_H2_BINLOG_POS",
+                    "comment": null
+                },
+                "_H2_BINLOG_FILE": {
+                    "type": "TEXT",
+                    "index": 9,
+                    "name": "_H2_BINLOG_FILE",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 67584.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 241.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-13 21:40UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.feedback_raw.ckapp_function_history"
+        },
+        "source.hrdm_ingest.feedback_raw.feedback_employeeptlsnapshot_history": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "FEEDBACK",
+                "name": "FEEDBACK_EMPLOYEEPTLSNAPSHOT_HISTORY",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_FEEDBACK_OWN"
+            },
+            "columns": {
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 1,
+                    "name": "ID",
+                    "comment": null
+                },
+                "SNAPSHOT_DATE": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 2,
+                    "name": "SNAPSHOT_DATE",
+                    "comment": null
+                },
+                "PTL_SCORE": {
+                    "type": "FLOAT",
+                    "index": 3,
+                    "name": "PTL_SCORE",
+                    "comment": null
+                },
+                "IS_RECORDED": {
+                    "type": "NUMBER",
+                    "index": 4,
+                    "name": "IS_RECORDED",
+                    "comment": null
+                },
+                "AUTHOR_EMPLOYEE_ID": {
+                    "type": "NUMBER",
+                    "index": 5,
+                    "name": "AUTHOR_EMPLOYEE_ID",
+                    "comment": null
+                },
+                "CURRENT_JOB_PROFILE_ID": {
+                    "type": "NUMBER",
+                    "index": 6,
+                    "name": "CURRENT_JOB_PROFILE_ID",
+                    "comment": null
+                },
+                "EMPLOYEE_ID": {
+                    "type": "NUMBER",
+                    "index": 7,
+                    "name": "EMPLOYEE_ID",
+                    "comment": null
+                },
+                "ROUND_ID": {
+                    "type": "NUMBER",
+                    "index": 8,
+                    "name": "ROUND_ID",
+                    "comment": null
+                },
+                "CREATED_ON": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 9,
+                    "name": "CREATED_ON",
+                    "comment": null
+                },
+                "_H2_SF_INSERTED": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 10,
+                    "name": "_H2_SF_INSERTED",
+                    "comment": null
+                },
+                "_H2_IS_DELETED": {
+                    "type": "BOOLEAN",
+                    "index": 11,
+                    "name": "_H2_IS_DELETED",
+                    "comment": null
+                },
+                "_H2_BINLOG_TS_MS": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 12,
+                    "name": "_H2_BINLOG_TS_MS",
+                    "comment": null
+                },
+                "_H2_BINLOG_POS": {
+                    "type": "NUMBER",
+                    "index": 13,
+                    "name": "_H2_BINLOG_POS",
+                    "comment": null
+                },
+                "_H2_BINLOG_FILE": {
+                    "type": "TEXT",
+                    "index": 14,
+                    "name": "_H2_BINLOG_FILE",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 33715712.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 1001184.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-18 02:50UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.feedback_raw.feedback_employeeptlsnapshot_history"
+        },
+        "source.hrdm_ingest.feedback_raw.ckapp_rubric_history": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "FEEDBACK",
+                "name": "CKAPP_RUBRIC_HISTORY",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_FEEDBACK_OWN"
+            },
+            "columns": {
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 1,
+                    "name": "ID",
+                    "comment": null
+                },
+                "NAME": {
+                    "type": "TEXT",
+                    "index": 2,
+                    "name": "NAME",
+                    "comment": null
+                },
+                "_H2_SF_INSERTED": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 3,
+                    "name": "_H2_SF_INSERTED",
+                    "comment": null
+                },
+                "_H2_IS_DELETED": {
+                    "type": "BOOLEAN",
+                    "index": 4,
+                    "name": "_H2_IS_DELETED",
+                    "comment": null
+                },
+                "_H2_BINLOG_TS_MS": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 5,
+                    "name": "_H2_BINLOG_TS_MS",
+                    "comment": null
+                },
+                "_H2_BINLOG_POS": {
+                    "type": "NUMBER",
+                    "index": 6,
+                    "name": "_H2_BINLOG_POS",
+                    "comment": null
+                },
+                "_H2_BINLOG_FILE": {
+                    "type": "TEXT",
+                    "index": 7,
+                    "name": "_H2_BINLOG_FILE",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 50176.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 361.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-03-30 18:48UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.feedback_raw.ckapp_rubric_history"
+        },
+        "source.hrdm_ingest.feedback_raw.ckapp_role_history": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "FEEDBACK",
+                "name": "CKAPP_ROLE_HISTORY",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_FEEDBACK_OWN"
+            },
+            "columns": {
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 1,
+                    "name": "ID",
+                    "comment": null
+                },
+                "NAME": {
+                    "type": "TEXT",
+                    "index": 2,
+                    "name": "NAME",
+                    "comment": null
+                },
+                "SEQ": {
+                    "type": "NUMBER",
+                    "index": 3,
+                    "name": "SEQ",
+                    "comment": null
+                },
+                "RANK": {
+                    "type": "NUMBER",
+                    "index": 4,
+                    "name": "RANK",
+                    "comment": null
+                },
+                "IS_SPECIFIED": {
+                    "type": "NUMBER",
+                    "index": 5,
+                    "name": "IS_SPECIFIED",
+                    "comment": null
+                },
+                "FUNCTION_ID": {
+                    "type": "NUMBER",
+                    "index": 6,
+                    "name": "FUNCTION_ID",
+                    "comment": null
+                },
+                "LEVEL_ID": {
+                    "type": "NUMBER",
+                    "index": 7,
+                    "name": "LEVEL_ID",
+                    "comment": null
+                },
+                "_H2_SF_INSERTED": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 8,
+                    "name": "_H2_SF_INSERTED",
+                    "comment": null
+                },
+                "_H2_IS_DELETED": {
+                    "type": "BOOLEAN",
+                    "index": 9,
+                    "name": "_H2_IS_DELETED",
+                    "comment": null
+                },
+                "_H2_BINLOG_TS_MS": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 10,
+                    "name": "_H2_BINLOG_TS_MS",
+                    "comment": null
+                },
+                "_H2_BINLOG_POS": {
+                    "type": "NUMBER",
+                    "index": 11,
+                    "name": "_H2_BINLOG_POS",
+                    "comment": null
+                },
+                "_H2_BINLOG_FILE": {
+                    "type": "TEXT",
+                    "index": 12,
+                    "name": "_H2_BINLOG_FILE",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 124928.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 1385.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-12 20:20UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.feedback_raw.ckapp_role_history"
+        },
+        "source.hrdm_ingest.feedback_raw.ckapp_organization_history": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "FEEDBACK",
+                "name": "CKAPP_ORGANIZATION_HISTORY",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_FEEDBACK_OWN"
+            },
+            "columns": {
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 1,
+                    "name": "ID",
+                    "comment": null
+                },
+                "NAME": {
+                    "type": "TEXT",
+                    "index": 2,
+                    "name": "NAME",
+                    "comment": null
+                },
+                "FEEDBACK_REQUEST_TEMPLATE_ID": {
+                    "type": "NUMBER",
+                    "index": 3,
+                    "name": "FEEDBACK_REQUEST_TEMPLATE_ID",
+                    "comment": null
+                },
+                "FEEDBACK_REMINDER_TEMPLATE_ID": {
+                    "type": "NUMBER",
+                    "index": 4,
+                    "name": "FEEDBACK_REMINDER_TEMPLATE_ID",
+                    "comment": null
+                },
+                "PEERFEEDBACK_FORM": {
+                    "type": "TEXT",
+                    "index": 5,
+                    "name": "PEERFEEDBACK_FORM",
+                    "comment": null
+                },
+                "REVIEW_FORM": {
+                    "type": "TEXT",
+                    "index": 6,
+                    "name": "REVIEW_FORM",
+                    "comment": null
+                },
+                "SELFEVAL_FORM": {
+                    "type": "TEXT",
+                    "index": 7,
+                    "name": "SELFEVAL_FORM",
+                    "comment": null
+                },
+                "UPWARD_FEEDBACK_RUBRIC": {
+                    "type": "TEXT",
+                    "index": 8,
+                    "name": "UPWARD_FEEDBACK_RUBRIC",
+                    "comment": null
+                },
+                "HIDE_ROLE": {
+                    "type": "NUMBER",
+                    "index": 9,
+                    "name": "HIDE_ROLE",
+                    "comment": null
+                },
+                "HIDE_OVERALL_RATING": {
+                    "type": "NUMBER",
+                    "index": 10,
+                    "name": "HIDE_OVERALL_RATING",
+                    "comment": null
+                },
+                "HIDE_SELFEVAL_RATING_UNTIL_LOCKED": {
+                    "type": "NUMBER",
+                    "index": 11,
+                    "name": "HIDE_SELFEVAL_RATING_UNTIL_LOCKED",
+                    "comment": null
+                },
+                "UPWARD_FEEDBACK_RUBRIC_ID": {
+                    "type": "NUMBER",
+                    "index": 12,
+                    "name": "UPWARD_FEEDBACK_RUBRIC_ID",
+                    "comment": null
+                },
+                "REVEAL_RATING": {
+                    "type": "NUMBER",
+                    "index": 13,
+                    "name": "REVEAL_RATING",
+                    "comment": null
+                },
+                "ANYTIME_FEEDBACK_RUBRIC_ID": {
+                    "type": "NUMBER",
+                    "index": 14,
+                    "name": "ANYTIME_FEEDBACK_RUBRIC_ID",
+                    "comment": null
+                },
+                "IS_PEER_FEEDBACK_ATTRIBUTED": {
+                    "type": "NUMBER",
+                    "index": 15,
+                    "name": "IS_PEER_FEEDBACK_ATTRIBUTED",
+                    "comment": null
+                },
+                "SHOW_PEER_FEEDBACK_RATINGS": {
+                    "type": "NUMBER",
+                    "index": 16,
+                    "name": "SHOW_PEER_FEEDBACK_RATINGS",
+                    "comment": null
+                },
+                "AUTO_SHARE_PEER_FEEDBACK": {
+                    "type": "NUMBER",
+                    "index": 17,
+                    "name": "AUTO_SHARE_PEER_FEEDBACK",
+                    "comment": null
+                },
+                "HIDE_SELFEVAL_AND_PEERFEEDBACK_ON_REVIEW": {
+                    "type": "NUMBER",
+                    "index": 18,
+                    "name": "HIDE_SELFEVAL_AND_PEERFEEDBACK_ON_REVIEW",
+                    "comment": null
+                },
+                "SHOW_AWARDS_PAGE": {
+                    "type": "NUMBER",
+                    "index": 19,
+                    "name": "SHOW_AWARDS_PAGE",
+                    "comment": null
+                },
+                "SHOW_PRIVATE_FEEDBACK_IN_CALIBRATION": {
+                    "type": "NUMBER",
+                    "index": 20,
+                    "name": "SHOW_PRIVATE_FEEDBACK_IN_CALIBRATION",
+                    "comment": null
+                },
+                "HIDE_PREVIOUS_QUARTER_REVIEW": {
+                    "type": "NUMBER",
+                    "index": 21,
+                    "name": "HIDE_PREVIOUS_QUARTER_REVIEW",
+                    "comment": null
+                },
+                "_H2_SF_INSERTED": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 22,
+                    "name": "_H2_SF_INSERTED",
+                    "comment": null
+                },
+                "_H2_IS_DELETED": {
+                    "type": "BOOLEAN",
+                    "index": 23,
+                    "name": "_H2_IS_DELETED",
+                    "comment": null
+                },
+                "_H2_BINLOG_TS_MS": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 24,
+                    "name": "_H2_BINLOG_TS_MS",
+                    "comment": null
+                },
+                "_H2_BINLOG_POS": {
+                    "type": "NUMBER",
+                    "index": 25,
+                    "name": "_H2_BINLOG_POS",
+                    "comment": null
+                },
+                "_H2_BINLOG_FILE": {
+                    "type": "TEXT",
+                    "index": 26,
+                    "name": "_H2_BINLOG_FILE",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 44544.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 22.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-07 20:49UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.feedback_raw.ckapp_organization_history"
+        },
+        "source.hrdm_ingest.feedback_raw.ckapp_level_history": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "FEEDBACK",
+                "name": "CKAPP_LEVEL_HISTORY",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_FEEDBACK_OWN"
+            },
+            "columns": {
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 1,
+                    "name": "ID",
+                    "comment": null
+                },
+                "NAME": {
+                    "type": "TEXT",
+                    "index": 2,
+                    "name": "NAME",
+                    "comment": null
+                },
+                "DESCRIPTION": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "DESCRIPTION",
+                    "comment": null
+                },
+                "RUBRIC_ID": {
+                    "type": "NUMBER",
+                    "index": 4,
+                    "name": "RUBRIC_ID",
+                    "comment": null
+                },
+                "SEQ": {
+                    "type": "NUMBER",
+                    "index": 5,
+                    "name": "SEQ",
+                    "comment": null
+                },
+                "IS_SPECIFIED": {
+                    "type": "NUMBER",
+                    "index": 6,
+                    "name": "IS_SPECIFIED",
+                    "comment": null
+                },
+                "_H2_SF_INSERTED": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 7,
+                    "name": "_H2_SF_INSERTED",
+                    "comment": null
+                },
+                "_H2_IS_DELETED": {
+                    "type": "BOOLEAN",
+                    "index": 8,
+                    "name": "_H2_IS_DELETED",
+                    "comment": null
+                },
+                "_H2_BINLOG_TS_MS": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 9,
+                    "name": "_H2_BINLOG_TS_MS",
+                    "comment": null
+                },
+                "_H2_BINLOG_POS": {
+                    "type": "NUMBER",
+                    "index": 10,
+                    "name": "_H2_BINLOG_POS",
+                    "comment": null
+                },
+                "_H2_BINLOG_FILE": {
+                    "type": "TEXT",
+                    "index": 11,
+                    "name": "_H2_BINLOG_FILE",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 83456.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 1508.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-03-30 15:18UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.feedback_raw.ckapp_level_history"
+        },
+        "source.hrdm_ingest.feedback_raw.ckapp_dimension_history": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "FEEDBACK",
+                "name": "CKAPP_DIMENSION_HISTORY",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_FEEDBACK_OWN"
+            },
+            "columns": {
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 1,
+                    "name": "ID",
+                    "comment": null
+                },
+                "NAME": {
+                    "type": "TEXT",
+                    "index": 2,
+                    "name": "NAME",
+                    "comment": null
+                },
+                "DESCRIPTION": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "DESCRIPTION",
+                    "comment": null
+                },
+                "RUBRIC_ID": {
+                    "type": "NUMBER",
+                    "index": 4,
+                    "name": "RUBRIC_ID",
+                    "comment": null
+                },
+                "SEQ": {
+                    "type": "NUMBER",
+                    "index": 5,
+                    "name": "SEQ",
+                    "comment": null
+                },
+                "IS_RATING_FIELD": {
+                    "type": "NUMBER",
+                    "index": 6,
+                    "name": "IS_RATING_FIELD",
+                    "comment": null
+                },
+                "_H2_SF_INSERTED": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 7,
+                    "name": "_H2_SF_INSERTED",
+                    "comment": null
+                },
+                "_H2_IS_DELETED": {
+                    "type": "BOOLEAN",
+                    "index": 8,
+                    "name": "_H2_IS_DELETED",
+                    "comment": null
+                },
+                "_H2_BINLOG_TS_MS": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 9,
+                    "name": "_H2_BINLOG_TS_MS",
+                    "comment": null
+                },
+                "_H2_BINLOG_POS": {
+                    "type": "NUMBER",
+                    "index": 10,
+                    "name": "_H2_BINLOG_POS",
+                    "comment": null
+                },
+                "_H2_BINLOG_FILE": {
+                    "type": "TEXT",
+                    "index": 11,
+                    "name": "_H2_BINLOG_FILE",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 118784.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 1872.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-01 20:22UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.feedback_raw.ckapp_dimension_history"
+        },
+        "source.hrdm_ingest.feedback_raw.feedback_round_history": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "FEEDBACK",
+                "name": "FEEDBACK_ROUND_HISTORY",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_FEEDBACK_OWN"
+            },
+            "columns": {
+                "ID": {
+                    "type": "NUMBER",
+                    "index": 1,
+                    "name": "ID",
+                    "comment": null
+                },
+                "NAME": {
+                    "type": "TEXT",
+                    "index": 2,
+                    "name": "NAME",
+                    "comment": null
+                },
+                "SLUG": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "SLUG",
+                    "comment": null
+                },
+                "CREATED": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 4,
+                    "name": "CREATED",
+                    "comment": null
+                },
+                "LAST_UPDATED": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 5,
+                    "name": "LAST_UPDATED",
+                    "comment": null
+                },
+                "PEER_FEEDBACK_DUE": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 6,
+                    "name": "PEER_FEEDBACK_DUE",
+                    "comment": null
+                },
+                "REVIEWS_DUE": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 7,
+                    "name": "REVIEWS_DUE",
+                    "comment": null
+                },
+                "SELF_EVALS_DUE": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 8,
+                    "name": "SELF_EVALS_DUE",
+                    "comment": null
+                },
+                "LOCKED": {
+                    "type": "NUMBER",
+                    "index": 9,
+                    "name": "LOCKED",
+                    "comment": null
+                },
+                "_H2_SF_INSERTED": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 10,
+                    "name": "_H2_SF_INSERTED",
+                    "comment": null
+                },
+                "_H2_IS_DELETED": {
+                    "type": "BOOLEAN",
+                    "index": 11,
+                    "name": "_H2_IS_DELETED",
+                    "comment": null
+                },
+                "_H2_BINLOG_TS_MS": {
+                    "type": "TIMESTAMP_LTZ",
+                    "index": 12,
+                    "name": "_H2_BINLOG_TS_MS",
+                    "comment": null
+                },
+                "_H2_BINLOG_POS": {
+                    "type": "NUMBER",
+                    "index": 13,
+                    "name": "_H2_BINLOG_POS",
+                    "comment": null
+                },
+                "_H2_BINLOG_FILE": {
+                    "type": "TEXT",
+                    "index": 14,
+                    "name": "_H2_BINLOG_FILE",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 41472.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 30.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-14 16:30UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.feedback_raw.feedback_round_history"
+        },
+        "source.hrdm_ingest.workday_raw.workday_cost_centers": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "WORKDAY",
+                "name": "WORKDAY_COST_CENTERS",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_WORKDAY_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 11412992.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 108657.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-14 16:06UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.workday_raw.workday_cost_centers"
+        },
+        "source.hrdm_ingest.workday_raw.workday_locations": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "WORKDAY",
+                "name": "WORKDAY_LOCATIONS",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_WORKDAY_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 2015232.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 21468.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-14 16:06UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.workday_raw.workday_locations"
+        },
+        "source.hrdm_ingest.workday_raw.workday_locations_hierarchy": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "WORKDAY",
+                "name": "WORKDAY_LOCATIONS_HIERARCHY",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_WORKDAY_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 419840.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 3292.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-14 16:06UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.workday_raw.workday_locations_hierarchy"
+        },
+        "source.hrdm_ingest.workday_raw.workday_supervisory_organizations": {
+            "metadata": {
+                "type": "BASE TABLE",
+                "schema": "WORKDAY",
+                "name": "WORKDAY_SUPERVISORY_ORGANIZATIONS",
+                "database": "HR_RAW",
+                "comment": null,
+                "owner": "_DB_HR_RAW_WORKDAY_OWN"
+            },
+            "columns": {
+                "RAW_DATA": {
+                    "type": "VARIANT",
+                    "index": 1,
+                    "name": "RAW_DATA",
+                    "comment": null
+                },
+                "RAW_INSERTED_TIMESTAMP": {
+                    "type": "TIMESTAMP_TZ",
+                    "index": 2,
+                    "name": "RAW_INSERTED_TIMESTAMP",
+                    "comment": null
+                },
+                "RAW_FILENAME": {
+                    "type": "TEXT",
+                    "index": 3,
+                    "name": "RAW_FILENAME",
+                    "comment": null
+                }
+            },
+            "stats": {
+                "bytes": {
+                    "id": "bytes",
+                    "label": "Approximate Size",
+                    "value": 10159104.0,
+                    "include": true,
+                    "description": "Approximate size of the table as reported by Snowflake"
+                },
+                "row_count": {
+                    "id": "row_count",
+                    "label": "Row Count",
+                    "value": 175859.0,
+                    "include": true,
+                    "description": "An approximate count of rows in this table"
+                },
+                "last_modified": {
+                    "id": "last_modified",
+                    "label": "Last Modified",
+                    "value": "2022-04-14 16:06UTC",
+                    "include": true,
+                    "description": "The timestamp for last update/change"
+                },
+                "has_stats": {
+                    "id": "has_stats",
+                    "label": "Has Stats?",
+                    "value": true,
+                    "include": false,
+                    "description": "Indicates whether there are statistics for this table"
+                }
+            },
+            "unique_id": "source.hrdm_ingest.workday_raw.workday_supervisory_organizations"
+        }
+    },
+    "errors": null
+}

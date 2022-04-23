@@ -1,0 +1,110 @@
+{
+    "raw_sql": "",
+    "resource_type": "model",
+    "depends_on": {
+        "macros": [
+            "macro.idw_package.dynamic_source",
+            "macro.dbt.is_incremental",
+            "macro.dbt_utils.surrogate_key",
+            "macro.logging.log_model_start_event",
+            "macro.logging.log_model_end_event"
+        ],
+        "nodes": [
+            "source.hrdm_ingest.workday_raw.workday_companies"
+        ]
+    },
+    "config": {
+        "enabled": True,
+        "alias": None,
+        "schema": "workday",
+        "database": None,
+        "tags": [
+            "SOURCE",
+            "WORKDAY",
+            "WORKDAY_RAW2SOURCE"
+        ],
+        "meta": {},
+        "materialized": "incremental",
+        "persist_docs": {
+            "relation": True,
+            "columns": True
+        },
+        "quoting": {},
+        "column_types": {},
+        "full_refresh": None,
+        "on_schema_change": "ignore",
+        "transient": False,
+        "unique_key": "company_key",
+        "post-hook": [
+            {
+                "sql": "{{ logging.log_model_end_event() }}",
+                "transaction": True,
+                "index": None
+            }
+        ],
+        "pre-hook": [
+            {
+                "sql": "{{ logging.log_model_start_event() }}",
+                "transaction": True,
+                "index": None
+            }
+        ]
+    },
+    "database": "HR_SOURCE_DEV",
+    "schema": "DEVHDRM_253_workday",
+    "fqn": [
+        "hrdm_ingest",
+        "raw2source",
+        "workday",
+        "workday_companies"
+    ],
+    "unique_id": "model.hrdm_ingest.workday_companies",
+    "package_name": "hrdm_ingest",
+    "root_path": "/app/dbt_ingest",
+    "path": "raw2source/workday/workday_companies.sql",
+    "original_file_path": "models/raw2source/workday/workday_companies.sql",
+    "name": "workday_companies",
+    "alias": "workday_companies",
+    "checksum": {
+        "name": "sha256",
+        "checksum": "ef66a598ee16bf4264253637babe0364ca71bde354b5c5242e01f66d3ac4bc75"
+    },
+    "tags": [
+        "SOURCE",
+        "WORKDAY",
+        "WORKDAY_RAW2SOURCE"
+    ],
+    "refs": [],
+    "sources": [
+        [
+            "workday_raw",
+            "workday_companies"
+        ]
+    ],
+    "description": "",
+    "columns": {},
+    "meta": {},
+    "docs": {
+        "show": True
+    },
+    "patch_path": None,
+    "compiled_path": None,
+    "build_path": None,
+    "deferred": False,
+    "unrendered_config": {
+        "transient": False,
+        "pre-hook": "{{ logging.log_model_start_event() }}",
+        "post-hook": "{{ logging.log_model_end_event() }}",
+        "persist_docs": {
+            "relation": True,
+            "columns": True
+        },
+        "tags": [
+            "WORKDAY_RAW2SOURCE"
+        ],
+        "materialized": "incremental",
+        "schema": "workday",
+        "unique_key": "company_key"
+    },
+    "created_at": 1650379610.8857305
+}

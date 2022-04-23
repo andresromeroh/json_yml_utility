@@ -1,0 +1,228 @@
+version: 2
+models:
+- name: dim_job_source
+  description: Type2 dimension for Job Source
+  tests:
+  - dbt_utils.recency:
+      datepart: day
+      field: etl_updated_timestamp
+      interval: 1
+      tags: timeliness
+      severity: warn
+  - dbt_expectations.expect_column_distinct_count_to_equal_other_table:
+      column_name: job_source_id
+      row_condition: dim_job_source_key <> '-1'
+      compare_model: ref('inter_collect_job_sources')
+      compare_column_name: job_source_id
+      compare_row_condition: true
+      tags: completeness
+      severity: warn
+  - dbt_expectations.expect_compound_columns_to_be_unique:
+      column_list:
+      - job_source_id
+      - timestamp_effective
+      tags: uniqueness
+      severity: warn
+  - dbt_utils.mutually_exclusive_ranges:
+      lower_bound_column: timestamp_effective
+      upper_bound_column: timestamp_expired
+      partition_by: job_source_id
+      tags: logical_continuity
+      severity: warn
+  meta:
+    slo:
+      included: true
+      delivery_time_ct: '8:00'
+      offset: -8
+      is_static: false
+      contact: Chase Roden
+      tag: job
+    ownership:
+      team_id: idw-datasets
+      ddo_delegate: Chase Roden
+      ddo_delegate_ldap: croden
+      subject_matter_expert: Jeff White
+      subject_matter_expert_ldap: jeffw
+      approver: Jeff White
+      approver_ldap: jeffw
+      approver_role: SME
+    detailed_description:
+      dataset_granularity: 1 row = one job source for a given time period
+      classification: null
+      classification_rationale: null
+      sensitive: null
+      is_degrated: false
+      comments: ''
+    build_requirements:
+      link_to_builder_code: https://code.corp.indeed.com/idw/idw-dbt-transformations/-/blob/master/dbt_transform/models/warehouse/jobs/dim_job_source.sql
+      link_to_orchestration_tool: https://airflow.indeed.tech/tree?dag_id=idw_dbt_etl_models_runoncedaily
+      link_to_design_document: https://wiki.indeed.com/display/IDW/Job+subject+area
+    origination:
+      refresh_cadence: daily
+      refresh_schedule: 3:30 AM
+    filters_and_limitations:
+      standard_filters_at_consumption: WHERE is_current - for current recs
+      general_limitations: No known limitations
+      field_discontinuities_irregularities: null
+      missing_data: N/A
+    data_access:
+      access_controls: Snowflake Access
+      access_controls_review: SFSUP Ticket
+    data_quality:
+      health_check: https://checkmate.sandbox.indeed.net/datacheck/?status=All&group_name=IDW_DQ_Jobs
+  columns:
+  - name: dim_job_source_key
+    description: This is the hash unique identifier for the job source record
+    tests:
+    - not_null:
+        tags: validity
+        severity: warn
+    - unique:
+        tags: uniqueness
+        severity: warn
+    meta:
+      type: VARCHAR
+      privacy_classification: None
+      ldm_model: https://alexandria.sandbox.indeed.net/logical-data-model/
+      ldm_attribute: null
+      datasource: IDW.WAREHOUSE.DIM_JOB_SOURCE
+      field: JOB_SOURCE_ID, TIMESTAMP_EFFECTIVE
+      comments: ''
+  - name: job_source_id
+    description: Unique identifier for the job source
+    tests:
+    - not_null:
+        tags: validity
+        severity: warn
+    - dbt_expectations.expect_column_values_to_be_of_type:
+        column_type: number
+        tags: validity
+        severity: warn
+    - unique:
+        config:
+          where: is_current = true
+        tags: uniqueness
+        severity: warn
+    meta:
+      type: NUMBER
+      privacy_classification: None
+      ldm_model: https://alexandria.sandbox.indeed.net/logical-data-model/Z_5H6HIBSNDQ-UvTXA_C
+      ldm_attribute: Source ID
+      datasource: SOURCE.JASEDB.TBLJOBSOURCE
+      field: ID
+      comments: ''
+  - name: job_source_name
+    description: Name of the job source
+    tests:
+    - not_null:
+        tags: validity
+        severity: warn
+    meta:
+      type: VARCHAR
+      privacy_classification: None
+      ldm_model: https://alexandria.sandbox.indeed.net/logical-data-model/Z_5H6HIBSNDQ-UvTXA_C
+      ldm_attribute: Source Name
+      datasource: SOURCE.JASEDB.TBLJOBSOURCE
+      field: SOURCE_NAME
+      comments: ''
+  - name: job_source_display_name
+    description: Display Name of the job source
+    tests:
+    - not_null:
+        tags: validity
+        severity: warn
+    meta:
+      type: VARCHAR
+      privacy_classification: None
+      ldm_model: https://alexandria.sandbox.indeed.net/logical-data-model/
+      ldm_attribute: null
+      datasource: SOURCE.JASEDB.TBLJOBSOURCE
+      field: DISPLAY_NAME
+      comments: ''
+  - name: job_source_type
+    description: The type of source.
+    tests:
+    - not_null:
+        tags: validity
+        severity: warn
+    meta:
+      type: VARCHAR
+      privacy_classification: None
+      ldm_model: https://alexandria.sandbox.indeed.net/logical-data-model/Z_5H6HIBSNDQ-UvTXA_C
+      ldm_attribute: Source Type
+      datasource: SOURCE.JASEDB.TBLJOBSOURCE
+      field: SOURCE_TYPE
+      comments: ''
+  - name: job_source_status
+    description: The status of the source.
+    tests:
+    - not_null:
+        tags: validity
+        severity: warn
+    meta:
+      type: VARCHAR
+      privacy_classification: None
+      ldm_model: https://alexandria.sandbox.indeed.net/logical-data-model/Z_5H6HIBSNDQ-UvTXA_C
+      ldm_attribute: Status
+      datasource: SOURCE.JASEDB.TBLJOBSOURCE
+      field: SOURCE_STATUS
+      comments: ''
+  - name: job_source_created_timestamp
+    description: The date the source was created
+    tests:
+    - dbt_expectations.expect_column_values_to_be_of_type:
+        column_type: timestamp_tz
+        tags: validity
+        severity: warn
+    meta:
+      type: TIMESTAMP_TZ
+      privacy_classification: None
+      ldm_model: https://alexandria.sandbox.indeed.net/logical-data-model/Z_5H6HIBSNDQ-UvTXA_C
+      ldm_attribute: Date Time Created
+      datasource: SOURCE.JASEDB.TBLJOBSOURCE
+      field: SOURCE_CREATEDATE
+      comments: ''
+  - name: timestamp_effective
+    description: Timestamp record became effective
+    tests:
+    - dbt_expectations.expect_column_values_to_be_of_type:
+        column_type: timestamp_tz
+        tags: validity
+        severity: warn
+    meta:
+      type: TIMESTAMP_TZ
+      privacy_classification: None
+      ldm_model: https://alexandria.sandbox.indeed.net/logical-data-model/Z_5H6HIBSNDQ-UvTXA_C
+      ldm_attribute: Status Date Time Start
+      datasource: SOURCE.JASEDB.TBLJOBSOURCE
+      field: N/A
+      comments: ''
+  - name: timestamp_expired
+    description: Timestamp for record expiration
+    tests:
+    - dbt_expectations.expect_column_values_to_be_of_type:
+        column_type: timestamp_tz
+        tags: validity
+        severity: warn
+    meta:
+      type: TIMESTAMP_TZ
+      privacy_classification: None
+      ldm_model: https://alexandria.sandbox.indeed.net/logical-data-model/Z_5H6HIBSNDQ-UvTXA_C
+      ldm_attribute: Status Date Time End
+      datasource: SOURCE.JASEDB.TBLJOBSOURCE
+      field: TIMESTAMP_EFFECTIVE, TIMESTAMP_EXPIRED
+      comments: ''
+  - name: is_current
+    description: Boolean, status of record's current validity
+    tests:
+    - dbt_expectations.expect_column_values_to_be_of_type:
+        column_type: boolean
+        severity: warn
+    meta:
+      type: BOOLEAN
+      privacy_classification: None
+      ldm_model: https://alexandria.sandbox.indeed.net/logical-data-model/Z_5H6HIBSNDQ-UvTXA_C
+      ldm_attribute: Is Status Current
+      datasource: IDW.WAREHOUSE.DIM_JOB_SOURCE
+      field: TIMESTAMP_EFFECTIVE
+      comments: ''
