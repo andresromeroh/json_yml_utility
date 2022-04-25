@@ -51,15 +51,13 @@ class SchemaBuilder(object):
     def get_models_from_manifest(self, model_selected=None):
         """Parse the manifest.json file and return only the selected model(s), all models by default."""
         # with open(os.path.join(self.project_dir, 'target', 'manifest.json')) as json_file:
-        with open('C:\\Users\\asge\\Documents\\git_repos\\json_yml_utility\\target\\catalog.json') as json_file:
+        with open('C:\\path\\to\\catalog.json') as json_file:  # TODO: absolute PATH, fix next commit to relative
             manifest_nodes = json.load(json_file)["nodes"]
-            #  {'/app/dbt_ingest', '/dbt-deps/logging'}
-            a = 1
             models_selected = [
                 content for name, content in manifest_nodes.items()
                 if name.startswith('model') and
-                   ((model_selected is None) or (content["metadata"]['name'] == model_selected)) and True
-                # os.path.split(content['root_path'])[-1] == os.path.split(self.project_dir)[-1]
+                   ((model_selected is None) or (content["metadata"]['name'] == model_selected))
+                   and os.path.split(content['root_path'])[-1] == os.path.split(self.project_dir)[-1]
             ]
 
             model_names = [model['metadata']['name'] for model in models_selected]
@@ -196,7 +194,7 @@ class SchemaBuilder(object):
                         'ldm_attribute': column.get('key'),  # TODO: which is the field
                         'datasource': column.get('key'),  # TODO: which is the field
                         'field': column.get('key'),  # TODO: which is the field
-                        'comments': column['comment']  # TODO: which is the field
+                        'comments': column['comment']  # TODO: which is the field, to confirm
                     })
                 })
                 for column in model['columns'].values() if model['columns']
@@ -228,8 +226,8 @@ class SchemaBuilder(object):
         obj['models'][0].pop('original_file_path')
         if model_name:
             file_name = f"{self.project_dir}/{original_path}"[:-3]
-            file_name = "C:\\Users\\asge\\Documents\\git_repos\\json_yml_utility\\app\\"
-            file_name = file_name + 'schema_test.yml'
+            file_name = "path\\to\\app\\"  # TODO: absolute PATH, fix next commit to relative
+            file_name = file_name + 'schema_test.yml'  # TODO: output name hardcoded, confirm if need something dynamic
             if exists(file_name) and not self.update:
                 return False
             else:

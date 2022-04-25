@@ -1,0 +1,59 @@
+version: 2
+models:
+  - name: company
+    description: ''
+    dbt_utils.recency:
+      datepart: day
+      field: etl_updated_timestamp
+      interval: 1
+      tags: timeliness
+      severity: warn
+    dbt_expectations.expect_column_distinct_count_to_equal_other_table:
+      column_name: job_source_id
+      row_condition: COLUMN_MODEL <> '-1'
+      compare_model: ref('COLUMN_MODEL')
+      compare_column_name: COLUMN_MODEL
+      compare_row_condition: true
+      tags: completeness
+      severity: warn
+    meta:
+      slo:
+        included: true
+        delivery_time_ct:
+        offset:
+        is_static:
+        contact:
+        tag:
+      ownership:
+        team_id:
+        ddo_delegate:
+        ddo_delegate_ldap:
+        subject_matter_expert:
+        subject_matter_expert_ldap:
+        approver:
+        approver_ldap:
+        approver_role:
+      detailed_description:
+        dataset_granularity:
+        classification:
+        classification_rationale:
+        sensitive:
+        is_degraded:
+        comments:
+      build_requirements:
+        link_to_builder_code:
+        link_to_orchestration_tool:
+        link_to_design_document:
+      origination:
+        refresh_cadence:
+        refresh_schedule:
+      filters_and_limitations:
+        standard_filters_at_consumption:
+        general_limitations:
+        field_discontinuities_irregularities:
+        missing_data:
+      data_access:
+        access_controls:
+        access_controls_review:
+      data_quality:
+        health_check:
