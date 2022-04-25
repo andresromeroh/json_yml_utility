@@ -4,6 +4,7 @@ import json
 import logging
 import os
 from os.path import exists
+from typing import Dict
 
 import click
 from ruamel import yaml
@@ -14,6 +15,10 @@ from ruamel.yaml.comments import \
 INDENTATION = 2
 
 logging.basicConfig(level=logging.INFO)
+
+CONSTANTS: Dict = {
+    'INPUT_JSON': 'catalog.json'
+}
 
 
 class SchemaBuilder(object):
@@ -43,22 +48,23 @@ class SchemaBuilder(object):
             logging.error(f"Manifest.json file not found!")
         try:
             self.build_objs()
-            # self.process_models()
+            self.process_models()
             pass
         except:
             logging.error(f"Error running the utility 'schema test' !")
 
     def get_models_from_manifest(self, model_selected=None):
         """Parse the manifest.json file and return only the selected model(s), all models by default."""
-        # with open(os.path.join(self.project_dir, 'target', 'manifest.json')) as json_file:
-        with open('C:\\path\\to\\catalog.json') as json_file:  # TODO: absolute PATH, fix next commit to relative
-            manifest_nodes = json.load(json_file)["nodes"]
+        file_to_open = os.path.abspath(
+            os.path.join(os.path.dirname(__file__), '../sources_truth', CONSTANTS.get('INPUT_JSON')))
+        with open(file_to_open) as json_file:  # TODO: absolute PATH, fix next commit to relative
+            manifest_nodes = json.load(json_file)["sources"]
             models_selected = [
-                content for name, content in manifest_nodes.items()
-                if name.startswith('model') and
-                   ((model_selected is None) or (content["metadata"]['name'] == model_selected))
-                   and os.path.split(content['root_path'])[-1] == os.path.split(self.project_dir)[-1]
-            ]
+                content for name, content in manifest_nodes.items()]
+            #     if name.startswith('model') and
+            #        ((model_selected is None) or (content["metadata"]['name'] == model_selected)) and True
+            #       # and os.path.split(content['root_path'])[-1] == os.path.split(self.project_dir)[-1]
+            # ]
 
             model_names = [model['metadata']['name'] for model in models_selected]
             qty_models = len(models_selected)
@@ -73,7 +79,7 @@ class SchemaBuilder(object):
         """Writes on yaml file the schema test."""
         for model in self.models:
             try:
-                model_obj = self._build_model_obj(model)  # THIS IS stuff.json
+                model_obj = self._build_model_obj(model)
                 self.model_objs.append(model_obj)
             except Exception as e:
                 logging.info(f"Error building model object with error: '{e}'")
@@ -83,9 +89,9 @@ class SchemaBuilder(object):
             "version": self.version,
             "models": [
                 OrderedDict({
-                    "name": model['metadata']['name'],  # TODO: confirm this is correct?
-                    "description": '',  # model['description'],  # TODO: which is the field
-                    'original_file_path': '',  # model['original_file_path'],  # TODO: which is the field
+                    "name": model['metadata']['name'],
+                    "description": model['metadata']['comment'],
+                    'original_file_path': '',  # TODO: needs a helper
                     "dbt_utils.recency":
                         OrderedDict({
                             'datepart': 'day',
@@ -170,7 +176,7 @@ class SchemaBuilder(object):
             [
                 OrderedDict({
                     'name': column['name'],
-                    'description': column.get(''),  # TODO: which is the field
+                    'description': column['comment'],  # TODO: which is the field
                     'tests': OrderedList(
                         [
                             OrderedDict({'not_null':
@@ -189,12 +195,12 @@ class SchemaBuilder(object):
                     ),
                     'meta': OrderedDict({
                         'type': column['type'],
-                        'privacy_classification': column.get('key'),  # TODO: which is the field
-                        'ldm_model': column.get('key'),  # TODO: which is the field
-                        'ldm_attribute': column.get('key'),  # TODO: which is the field
-                        'datasource': column.get('key'),  # TODO: which is the field
-                        'field': column.get('key'),  # TODO: which is the field
-                        'comments': column['comment']  # TODO: which is the field, to confirm
+                        'privacy_classification': None,
+                        'ldm_model': None,
+                        'ldm_attribute': None,
+                        'datasource': None,
+                        'field': None,
+                        'comments': ''
                     })
                 })
                 for column in model['columns'].values() if model['columns']
