@@ -1,10 +1,10 @@
 # json_yml_utility
 Read from JSON file, generate schema_test.yml from SQL models based on their metada-
 
-1) Make the script work: *
----- load/read models & manifest directories correctly
----- create schema test for all model, if no args passed on CLI
----- create schema test for one model, if by args passed 
+1) Make the script work: *  
+---- load/read models & manifest directories correctly  
+---- create schema test for all model, if no args passed on CLI  
+---- create schema test for one model, if by args passed   
 
 * the code works, may just change some directory paths-
 

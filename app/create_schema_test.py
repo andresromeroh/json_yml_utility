@@ -39,28 +39,30 @@ class SchemaBuilder(object):
         try:
             logging.info("---- Schema Builder Utility Started! ----")
             self.models = self.get_models_from_manifest(self.model_selected)
-        except:
+        except FileNotFoundError as e:
             logging.error(f"Manifest.json file not found!")
         try:
             self.build_objs()
-            self.process_models()
+            # self.process_models()
+            pass
         except:
             logging.error(f"Error running the utility 'schema test' !")
 
     def get_models_from_manifest(self, model_selected=None):
         """Parse the manifest.json file and return only the selected model(s), all models by default."""
-        with open(os.path.join(self.project_dir, 'target', 'manifest.json')) as json_file:
+        # with open(os.path.join(self.project_dir, 'target', 'manifest.json')) as json_file:
+        with open('C:\\Users\\asge\\Documents\\git_repos\\json_yml_utility\\target\\catalog.json') as json_file:
             manifest_nodes = json.load(json_file)["nodes"]
-
+            #  {'/app/dbt_ingest', '/dbt-deps/logging'}
+            a = 1
             models_selected = [
                 content for name, content in manifest_nodes.items()
                 if name.startswith('model') and
-                ((model_selected is None) or (content["name"] == model_selected)) and
-                os.path.split(
-                    content['root_path'])[-1] == os.path.split(self.project_dir)[-1]
+                   ((model_selected is None) or (content["metadata"]['name'] == model_selected)) and True
+                # os.path.split(content['root_path'])[-1] == os.path.split(self.project_dir)[-1]
             ]
 
-            model_names = [model['name'] for model in models_selected]
+            model_names = [model['metadata']['name'] for model in models_selected]
             qty_models = len(models_selected)
             logging.info(f"...Processing {qty_models} models...")
 
@@ -83,9 +85,9 @@ class SchemaBuilder(object):
             "version": self.version,
             "models": [
                 OrderedDict({
-                    "name": model['name'],
-                    "description": model['description'],
-                    'original_file_path': model['original_file_path'],
+                    "name": model['metadata']['name'],  # TODO: confirm this is correct?
+                    "description": '',  # model['description'],  # TODO: which is the field
+                    'original_file_path': '',  # model['original_file_path'],  # TODO: which is the field
                     "dbt_utils.recency":
                         OrderedDict({
                             'datepart': 'day',
@@ -169,28 +171,35 @@ class SchemaBuilder(object):
         return OrderedList(
             [
                 OrderedDict({
-                    'name': model['columns'][column]['name'],
-                    'description': model['columns'][column]['description'],
+                    'name': column['name'],
+                    'description': column.get(''),  # TODO: which is the field
                     'tests': OrderedList(
                         [
                             OrderedDict({'not_null':
-                                         OrderedDict({
-                                             'tags': 'validity',
-                                             'severity': 'warn'
-                                         })
-                                         })
+                                OrderedDict({
+                                    'tags': 'validity',
+                                    'severity': 'warn'
+                                })
+                            }),
+                            OrderedDict({'unique':
+                                OrderedDict({
+                                    'tags': 'validity',
+                                    'severity': 'warn'
+                                })
+                            }),
                         ]
                     ),
                     'meta': OrderedDict({
-                        'type': None,
-                        'privacy_classification': None,
-                        'ldm_model': None,
-                        'ldm_attribute': None,
-                        'datasource': None,
-                        'field': None
+                        'type': column['type'],
+                        'privacy_classification': column.get('key'),  # TODO: which is the field
+                        'ldm_model': column.get('key'),  # TODO: which is the field
+                        'ldm_attribute': column.get('key'),  # TODO: which is the field
+                        'datasource': column.get('key'),  # TODO: which is the field
+                        'field': column.get('key'),  # TODO: which is the field
+                        'comments': column['comment']  # TODO: which is the field
                     })
                 })
-                for column in model['columns'] if model['columns']
+                for column in model['columns'].values() if model['columns']
             ]
         )
 
@@ -219,11 +228,12 @@ class SchemaBuilder(object):
         obj['models'][0].pop('original_file_path')
         if model_name:
             file_name = f"{self.project_dir}/{original_path}"[:-3]
+            file_name = "C:\\Users\\asge\\Documents\\git_repos\\json_yml_utility\\app\\"
             file_name = file_name + 'schema_test.yml'
             if exists(file_name) and not self.update:
                 return False
             else:
-                with open(file_name, 'w') as f:
+                with open(file_name, 'w+') as f:
                     obj['version'] = 2
                     yml.dump(obj, f)
                 return True
