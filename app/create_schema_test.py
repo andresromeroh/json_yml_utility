@@ -17,14 +17,15 @@ INDENTATION = 2
 logging.basicConfig(level=logging.INFO)
 
 CONSTANTS: Dict = {
-    'INPUT_JSON': 'catalog.json'
+    'INPUT_JSON': 'catalog.json',
+    'MODEL_PATH': 'model',
 }
 
 
 class SchemaBuilder(object):
     """Builds schema test yml files for models within a dbt project.
 
-    Note that this code is dependent upon a manifest.json file within the project's target directory.
+    Note that this code is dependent upon a catalog.json file within the project's target directory.
     This file is not configuration managed and is updated and dbt models are compiled and run.  Ensure
     that you compile the entirity of the dbt project you intend to generate schema tests for prior to
     executing this script.
@@ -43,28 +44,27 @@ class SchemaBuilder(object):
         """Generate the schema test yaml files."""
         try:
             logging.info("---- Schema Builder Utility Started! ----")
-            self.models = self.get_models_from_manifest(self.model_selected)
+            self.models = self.get_models_from_input(self.model_selected)
         except FileNotFoundError as e:
-            logging.error(f"Manifest.json file not found!")
+            logging.error(f"{CONSTANTS['INPUT_JSON']} file not found!")
         try:
             self.build_objs()
             self.process_models()
-            pass
         except:
             logging.error(f"Error running the utility 'schema test' !")
 
-    def get_models_from_manifest(self, model_selected=None):
-        """Parse the manifest.json file and return only the selected model(s), all models by default."""
+    def get_models_from_input(self, model_selected=None):
+        """Parse the CONSTANTS['INPUT_JSON'] file and return only the selected model(s), all models by default."""
+        lower_model_selected = model_selected.lower() if model_selected else None
         file_to_open = os.path.abspath(
             os.path.join(os.path.dirname(__file__), '../sources_truth', CONSTANTS.get('INPUT_JSON')))
-        with open(file_to_open) as json_file:  # TODO: absolute PATH, fix next commit to relative
-            manifest_nodes = json.load(json_file)["sources"]
+        with open(file_to_open) as json_file:
+            input_sources = json.load(json_file)["sources"]
             models_selected = [
-                content for name, content in manifest_nodes.items()]
-            #     if name.startswith('model') and
-            #        ((model_selected is None) or (content["metadata"]['name'] == model_selected)) and True
-            #       # and os.path.split(content['root_path'])[-1] == os.path.split(self.project_dir)[-1]
-            # ]
+                content for name, content in input_sources.items()
+                if name.startswith('source') and
+                   ((lower_model_selected is None) or (content["metadata"]['name'].lower() == lower_model_selected))
+            ]
 
             model_names = [model['metadata']['name'] for model in models_selected]
             qty_models = len(models_selected)
@@ -91,7 +91,7 @@ class SchemaBuilder(object):
                 OrderedDict({
                     "name": model['metadata']['name'],
                     "description": model['metadata']['comment'],
-                    'original_file_path': '',  # TODO: needs a helper
+                    'original_file_path': f"{CONSTANTS['MODEL_PATH']}/{model['metadata']['name']}",
                     "dbt_utils.recency":
                         OrderedDict({
                             'datepart': 'day',
@@ -168,7 +168,7 @@ class SchemaBuilder(object):
         cols = self._build_columns_obj(model)
         if cols:
             result["models"][0]["columns"] = cols
-        logging.debug(f" Model {model['name']} processed! ----")
+        logging.debug(f" Model {model['metadata']['name']} processed! ----")
         return result
 
     def _build_columns_obj(self, model):
@@ -184,13 +184,7 @@ class SchemaBuilder(object):
                                     'tags': 'validity',
                                     'severity': 'warn'
                                 })
-                            }),
-                            OrderedDict({'unique':
-                                OrderedDict({
-                                    'tags': 'validity',
-                                    'severity': 'warn'
-                                })
-                            }),
+                            })
                         ]
                     ),
                     'meta': OrderedDict({
@@ -231,13 +225,13 @@ class SchemaBuilder(object):
         original_path = obj['models'][0].get('original_file_path')
         obj['models'][0].pop('original_file_path')
         if model_name:
-            file_name = f"{self.project_dir}/{original_path}"[:-3]
-            file_name = "path\\to\\app\\"  # TODO: absolute PATH, fix next commit to relative
-            file_name = file_name + 'schema_test.yml'  # TODO: output name hardcoded, confirm if need something dynamic
-            if exists(file_name) and not self.update:
+            file_to_write = os.path.abspath(os.path.join(os.path.dirname(__file__), original_path))
+            file_to_write = f"{file_to_write}.yml"
+            if exists(file_to_write) and not self.update:
                 return False
             else:
-                with open(file_name, 'w+') as f:
+                os.makedirs(os.path.dirname(file_to_write), exist_ok=True)
+                with open(file_to_write, 'w+') as f:
                     obj['version'] = 2
                     yml.dump(obj, f)
                 return True
