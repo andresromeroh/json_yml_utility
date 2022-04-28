@@ -1,0 +1,104 @@
+version: 2
+models:
+  - name: TALENTPOOL
+    description: RAW TABLE FOR ICIMS TALENTPOOL
+    original_file_path: models/raw2source/icims/talentpool.sql
+    test:
+      - dbt_utils.recency:
+          datepart:
+          field:
+          interval: 1
+          tags: timeliness
+          severity: warn
+        dbt_expectations.expect_column_distinct_count_to_equal_other_table:
+          column_name:
+          row_condition:
+          compare_model:
+          compare_column_name:
+          compare_row_condition: true
+          tags: completeness
+          severity: warn
+    meta:
+      slo:
+        included: true
+        delivery_time_ct:
+        offset:
+        is_static:
+        contact:
+        tag:
+      ownership:
+        team_id:
+        ddo_delegate:
+        ddo_delegate_ldap:
+        subject_matter_expert:
+        subject_matter_expert_ldap:
+        approver:
+        approver_ldap:
+        approver_role:
+      detailed_description:
+        dataset_granularity:
+        classification:
+        classification_rationale:
+        sensitive:
+        is_degraded:
+        comments:
+      build_requirements:
+        link_to_builder_code:
+        link_to_orchestration_tool:
+        link_to_design_document:
+      origination:
+        refresh_cadence:
+        refresh_schedule:
+      filters_and_limitations:
+        standard_filters_at_consumption:
+        general_limitations:
+        field_discontinuities_irregularities:
+        missing_data:
+      data_access:
+        access_controls:
+        access_controls_review:
+      data_quality:
+        health_check:
+    columns:
+      - name: RAW_DATA
+        description:
+        tests:
+          - not_null:
+              tags: validity
+              severity: warn
+        meta:
+          type: VARIANT
+          privacy_classification:
+          ldm_model:
+          ldm_attribute:
+          datasource:
+          field:
+          comments:
+      - name: RAW_INSERTED_TIMESTAMP
+        description:
+        tests:
+          - not_null:
+              tags: validity
+              severity: warn
+        meta:
+          type: TIMESTAMP_TZ
+          privacy_classification:
+          ldm_model:
+          ldm_attribute:
+          datasource:
+          field:
+          comments:
+      - name: RAW_FILENAME
+        description:
+        tests:
+          - not_null:
+              tags: validity
+              severity: warn
+        meta:
+          type: TEXT
+          privacy_classification:
+          ldm_model:
+          ldm_attribute:
+          datasource:
+          field:
+          comments:
