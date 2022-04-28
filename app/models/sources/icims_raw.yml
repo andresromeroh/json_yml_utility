@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+ - name: icims_raw
+   database: HR_RAW_QA
+   schema: icims
+   tables:
+    - name: talentpool
+    - name: connectevent
+    - name: person
+    - name: room
+    - name: connecteventworkflow
+    - name: connecteventworkflowsource
+    - name: company
+    - name: sourceworkflow
+    - name: submittal

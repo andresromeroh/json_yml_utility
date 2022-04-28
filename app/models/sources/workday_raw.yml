@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+ - name: workday_raw
+   database: HR_RAW
+   schema: workday
+   tables:
+    - name: workday_locations
+    - name: workday_locations_hierarchy
+    - name: workday_cost_centers
+    - name: workday_supervisory_organizations
+    - name: workday_companies
+    - name: workday_custom_organizations
+    - name: workday_job_profiles
+    - name: workday_suppliers
+    - name: workday_transactions

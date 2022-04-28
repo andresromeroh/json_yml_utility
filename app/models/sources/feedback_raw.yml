@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+ - name: feedback_raw
+   database: HR_RAW
+   schema: feedback
+   tables:
+    - name: ckapp_dimension_history
+    - name: ckapp_function_history
+    - name: ckapp_level_history
+    - name: ckapp_organization_history
+    - name: ckapp_role_history
+    - name: ckapp_rubric_history
+    - name: feedback_dimensionvaluefeedbackitem_history
+    - name: feedback_employeeptlsnapshot_history
+    - name: feedback_round_history
+    - name: feedback_integerfeedbackitem_history
+    - name: form_builder_form_history
+    - name: feedback_feedback_history
+    - name: feedback_calibration_history
+    - name: indeedworkday_workdayprofile_history
+    - name: feedback_employeeptlinfo_history
+    
