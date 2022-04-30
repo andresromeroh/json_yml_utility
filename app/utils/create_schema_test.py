@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import enum
 import json
 import logging
 import os
@@ -21,6 +22,16 @@ SOURCES: Dict = {
     "MODELS_PATH": "manifest.json",
 }
 
+
+class Literal(enum.Enum):
+    MODEL = "model"
+    NODES = "nodes"
+    SOURCE = "source"
+    SOURCES = "sources"
+    MODELS_MANIFEST = "manifest.json"
+    MODELS_CATALOG = "catalog.json"
+
+
 logging.basicConfig(level=logging.INFO)
 
 
@@ -38,19 +49,18 @@ class SchemaBuilder(object):
             "/") else project_dir[:-1])
         self.model_selected = model_selected
         self.model_sources = []
-        self.model_paths = []
         self.models = []
         self.version = version
         self.update = update
         self.destination_path = ""
-        self.base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))  # Project Root abs path, assuming target is two folders deep
+        self.base_path = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                                      '../..'))  # Project Root abs path, assuming target is two folders deep
         self.root_directory = 'app'
         self.file_paths = self.build_models_paths()
 
     def start(self):
         """Generate the schema test yaml files."""
         try:
-            self.model_paths = self.get_models_from_manifest(self.model_selected)
             self.model_sources = self.get_models_from_catalog(self.model_selected)
         except FileNotFoundError as e:
             logging.error("Manifest.json file not found!")
@@ -67,15 +77,18 @@ class SchemaBuilder(object):
         return paths
 
     def get_models_from_manifest(self, model_selected=None):
-        """Parse the manifest.json file and return only the models selected (or all models if model_selected is None)."""
+        """
+            Parse the manifest.json file and return only the models selected (or all models if model_selected is None).
+            @DEPRECATED, USE SchemaBuilder.build_models_paths()
+        """
         with open(
-                os.path.join(self.base_path, self.project_dir, "target", SOURCES["MODELS_PATH"])
+                os.path.join(self.base_path, self.project_dir, "target", Literal.MODELS_MANIFEST.value)
         ) as json_file:
-            manifest_nodes = json.load(json_file)["nodes"]
+            manifest_nodes = json.load(json_file)[Literal.NODES.value]
             return [
                 content
                 for name, content in manifest_nodes.items()
-                if name.startswith("model")
+                if name.startswith(Literal.MODEL.value)
                    and ((model_selected is None) or (content["name"] == model_selected))
                    and os.path.split(content["root_path"])[-1] == os.path.split(self.project_dir)[-1]
             ]
@@ -83,22 +96,18 @@ class SchemaBuilder(object):
     def get_models_from_catalog(self, model_selected=None):
         """Parse the CATALOG file and return only the selected model(s), all models by default."""
         lower_model_selected = model_selected.lower() if model_selected else None
-        file_to_open = os.path.join(self.base_path, self.project_dir, "target", SOURCES["MODELS_METADATA"])
+        file_to_open = os.path.join(self.base_path, self.project_dir, "target", Literal.MODELS_CATALOG.value)
         with open(file_to_open) as json_file:
-            input_sources = json.load(json_file)["sources"]
+            raw_load = json.load(json_file)
+            input_sources = {**raw_load[Literal.SOURCES.value], **raw_load[Literal.NODES.value]}
             models_selected = [
                 content
                 for name, content in input_sources.items()
-                if name.startswith("source") and ((not lower_model_selected)
-                                                  or (content["metadata"]["name"].lower() == lower_model_selected))
+                if (name.startswith(Literal.SOURCE.value) or name.startswith(Literal.MODEL.value)) and (
+                        (not lower_model_selected) or (content["metadata"]["name"].lower() == lower_model_selected))
             ]
-
-            model_names = [model["metadata"]["name"]
-                           for model in models_selected]
-            qty_models = len(models_selected)
-
-            logging.info(f"...Processing {qty_models} models...")
-
+            model_names = [model["metadata"]["name"] for model in models_selected]
+            logging.info(f"...Processing {len(models_selected)} models...")
             if models_selected:
                 logging.info(f"{model_names}")
 
@@ -115,7 +124,7 @@ class SchemaBuilder(object):
                 logging.info(f"Error building model object with error: '{e}'")
 
     def find_model_original_path(self, dbt_model_name):
-        """Find the model original directoy paths from manifest.json"""
+        """Find the model original directory paths from reading the project tree"""
         path_for_model = self.file_paths.get(dbt_model_name.lower()) if dbt_model_name else None
         if path_for_model:
             self.destination_path = path_for_model
@@ -133,7 +142,7 @@ class SchemaBuilder(object):
                                 "name": model_with_columns["metadata"]["name"],
                                 "description": model_with_columns["metadata"]["comment"],
                                 "original_file_path": self.find_model_original_path(
-                                    model_with_columns["unique_id"].split(".")[3]),
+                                    model_with_columns["unique_id"].split(".")[-1]),
                                 "test": [
                                     OrderedDict(
                                         {
@@ -307,7 +316,6 @@ class SchemaBuilder(object):
         if exists(file_to_write) and not self.update:
             return False
         else:
-            # os.makedirs(os.path.dirname(file_to_write), exist_ok=True)
             with open(file_to_write, "w+") as f:
                 dbt_model["version"] = 2
                 yml.dump(dbt_model, f)
