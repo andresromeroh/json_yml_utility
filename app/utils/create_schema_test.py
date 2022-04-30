@@ -303,8 +303,7 @@ class SchemaBuilder(object):
         yml = yaml.YAML()
         yml.indent(mapping=2, sequence=4, offset=2)
         self.destination_path = self.find_model_original_path(dbt_model_name)
-        file_to_write = f"{self.project_dir}/{self.destination_path}"[:-3] + "yml"
-
+        file_to_write = f"{self.destination_path}"[:-3] + "yml"
         if exists(file_to_write) and not self.update:
             return False
         else:
