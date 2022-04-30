@@ -43,6 +43,9 @@ class SchemaBuilder(object):
         self.version = version
         self.update = update
         self.destination_path = ""
+        self.base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))  # Project Root abs path, assuming target is two folders deep
+        self.root_directory = 'app'
+        self.file_paths = self.build_models_paths()
 
     def start(self):
         """Generate the schema test yaml files."""
@@ -55,29 +58,32 @@ class SchemaBuilder(object):
         self.build_yml_objs()
         self.process_models()
 
+    def build_models_paths(self) -> Dict:
+        paths = {}
+        for path, dirs, files in os.walk(os.path.join(self.base_path, self.root_directory)):
+            for file in files:
+                filename_with_no_extension: str = file.split(".")[0]
+                paths[filename_with_no_extension.lower()] = os.path.join(path, file)
+        return paths
+
     def get_models_from_manifest(self, model_selected=None):
         """Parse the manifest.json file and return only the models selected (or all models if model_selected is None)."""
-        base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
         with open(
-                os.path.join(base_path, self.project_dir, "target", SOURCES["MODELS_PATH"])
+                os.path.join(self.base_path, self.project_dir, "target", SOURCES["MODELS_PATH"])
         ) as json_file:
             manifest_nodes = json.load(json_file)["nodes"]
-            a = 1
             return [
                 content
                 for name, content in manifest_nodes.items()
                 if name.startswith("model")
                    and ((model_selected is None) or (content["name"] == model_selected))
-                   and os.path.split(content["root_path"])[-1]
-                   == os.path.split(self.project_dir)[-1]
+                   and os.path.split(content["root_path"])[-1] == os.path.split(self.project_dir)[-1]
             ]
 
     def get_models_from_catalog(self, model_selected=None):
         """Parse the CATALOG file and return only the selected model(s), all models by default."""
         lower_model_selected = model_selected.lower() if model_selected else None
-        file_to_open = os.path.join(
-            self.project_dir, "target", SOURCES["MODELS_METADATA"]
-        )
+        file_to_open = os.path.join(self.base_path, self.project_dir, "target", SOURCES["MODELS_METADATA"])
         with open(file_to_open) as json_file:
             input_sources = json.load(json_file)["sources"]
             models_selected = [
@@ -110,21 +116,9 @@ class SchemaBuilder(object):
 
     def find_model_original_path(self, dbt_model_name):
         """Find the model original directoy paths from manifest.json"""
-        try:
-            model_original_paths = []
-            destination_path = ''
-            if not self.destination_path:
-                for model_node in self.model_paths:
-                    model_original_paths.append(
-                        model_node["original_file_path"])
-
-                for path in model_original_paths:
-                    if dbt_model_name in path:
-                        destination_path = path
-
-                self.destination_path = destination_path
-        except Exception as error:
-            logging.info(f"Error finding the path of model {error}")
+        path_for_model = self.file_paths.get(dbt_model_name.lower()) if dbt_model_name else None
+        if path_for_model:
+            self.destination_path = path_for_model
         return self.destination_path
 
     def _build_yml_model_obj(self, model_with_columns):
@@ -306,9 +300,6 @@ class SchemaBuilder(object):
         """Write the yaml files for schema testing."""
         logging.info(f"...Writing {dbt_model_name}")
         logging.debug(f"...obj {dbt_model}")
-        import pdb
-        pdb.set_trace()
-
         yml = yaml.YAML()
         yml.indent(mapping=2, sequence=4, offset=2)
         self.destination_path = self.find_model_original_path(dbt_model_name)
@@ -317,6 +308,7 @@ class SchemaBuilder(object):
         if exists(file_to_write) and not self.update:
             return False
         else:
+            # os.makedirs(os.path.dirname(file_to_write), exist_ok=True)
             with open(file_to_write, "w+") as f:
                 dbt_model["version"] = 2
                 yml.dump(dbt_model, f)
