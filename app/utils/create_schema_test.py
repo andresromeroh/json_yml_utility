@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
 import json
 import logging
-from typing import Dict
+import os
 from os.path import exists
+from typing import Dict
 
 import click
-
 from ruamel import yaml
 from ruamel.yaml.comments import (
     CommentedMap as OrderedDict,
@@ -50,7 +49,7 @@ class SchemaBuilder(object):
         try:
             self.model_paths = self.get_models_from_manifest(self.model_selected)
             self.model_sources = self.get_models_from_catalog(self.model_selected)
-        except:
+        except FileNotFoundError as e:
             logging.error("Manifest.json file not found!")
 
         self.build_yml_objs()
@@ -58,17 +57,19 @@ class SchemaBuilder(object):
 
     def get_models_from_manifest(self, model_selected=None):
         """Parse the manifest.json file and return only the models selected (or all models if model_selected is None)."""
+        base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
         with open(
-            os.path.join(self.project_dir, "target", SOURCES["MODELS_PATH"])
+                os.path.join(base_path, self.project_dir, "target", SOURCES["MODELS_PATH"])
         ) as json_file:
             manifest_nodes = json.load(json_file)["nodes"]
+            a = 1
             return [
                 content
                 for name, content in manifest_nodes.items()
                 if name.startswith("model")
-                and ((model_selected is None) or (content["name"] == model_selected))
-                and os.path.split(content["root_path"])[-1]
-                == os.path.split(self.project_dir)[-1]
+                   and ((model_selected is None) or (content["name"] == model_selected))
+                   and os.path.split(content["root_path"])[-1]
+                   == os.path.split(self.project_dir)[-1]
             ]
 
     def get_models_from_catalog(self, model_selected=None):
@@ -111,7 +112,7 @@ class SchemaBuilder(object):
         """Find the model original directoy paths from manifest.json"""
         try:
             model_original_paths = []
-
+            destination_path = ''
             if not self.destination_path:
                 for model_node in self.model_paths:
                     model_original_paths.append(
@@ -260,7 +261,7 @@ class SchemaBuilder(object):
                                         {
                                             "not_null": OrderedDict(
                                                 {"tags": "validity",
-                                                    "severity": "warn"}
+                                                 "severity": "warn"}
                                             )
                                         }
                                     )
@@ -305,7 +306,8 @@ class SchemaBuilder(object):
         """Write the yaml files for schema testing."""
         logging.info(f"...Writing {dbt_model_name}")
         logging.debug(f"...obj {dbt_model}")
-        import pdb; pdb.set_trace()
+        import pdb
+        pdb.set_trace()
 
         yml = yaml.YAML()
         yml.indent(mapping=2, sequence=4, offset=2)
@@ -329,8 +331,8 @@ class SchemaBuilder(object):
     "-pd",
     default="/app/dbt_transform",
     help=(
-        "The path to the dbt project for which to generate schema tests. \
-        The default is dbt_transform."
+            "The path to the dbt project for which to generate schema tests. \
+            The default is dbt_transform."
     ),
 )
 @click.option(
@@ -338,8 +340,8 @@ class SchemaBuilder(object):
     "-m",
     default=None,
     help=(
-        "The name of the model to generate schema tests for.  If not passed \
-        schema tests will be generated for all models within the project."
+            "The name of the model to generate schema tests for.  If not passed \
+            schema tests will be generated for all models within the project."
     ),
 )
 @click.option(
