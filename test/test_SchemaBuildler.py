@@ -2,7 +2,9 @@
 Test cases for SchemaBuilder
 
 """
-from typing import List
+import json
+from typing import List, Dict
+import os
 
 from app.utils.create_schema_test import SchemaBuilder
 
@@ -11,6 +13,10 @@ def test_all_models_selected(mocker):
     mocker.patch(
         'app.utils.create_schema_test.SchemaBuilder.write_yaml',  # Do not write in disk for this test
         return_value=None
+    )
+    mocker.patch(
+        'app.utils.create_schema_test.SchemaBuilder.read_json',
+        return_value=read_test_catalog()
     )
     project_dir = 'app/dbt_ingest'
     model = None
@@ -27,6 +33,10 @@ def test_single_model_selected(mocker):
     mocker.patch(
         'app.utils.create_schema_test.SchemaBuilder.write_yaml',  # Do not write in disk for this test
         return_value=None
+    )
+    mocker.patch(
+        'app.utils.create_schema_test.SchemaBuilder.read_json',
+        return_value=read_test_catalog()
     )
     project_dir = 'app/dbt_ingest'
     model = "company"
@@ -45,6 +55,10 @@ def test_single_model_selected_schema(mocker):
         'app.utils.create_schema_test.SchemaBuilder.write_yaml',  # Do not write in disk for this test
         return_value=None
     )
+    mocker.patch(
+        'app.utils.create_schema_test.SchemaBuilder.read_json',
+        return_value=read_test_catalog()
+    )
     project_dir = 'app/dbt_ingest'
     model = "company"
     update = True
@@ -55,3 +69,10 @@ def test_single_model_selected_schema(mocker):
     output_models: List = builder.models
     assert output_models
     assert len(output_models) == 1
+    # TODO: COMPARE SCHEMA
+
+
+def read_test_catalog() -> Dict:
+    path = os.path.abspath(f"{os.path.dirname(__file__)}/resources/target/catalog.json")
+    with open(path) as json_file:
+        return json.load(json_file)

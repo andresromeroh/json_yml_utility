@@ -92,25 +92,29 @@ class SchemaBuilder(object):
                    and os.path.split(content["root_path"])[-1] == os.path.split(self.project_dir)[-1]
             ]
 
+    @staticmethod
+    def read_json(path: str) -> Dict:
+        with open(path) as json_file:
+            return json.load(json_file)
+
     def get_models_from_catalog(self, model_selected=None):
         """Parse the CATALOG file and return only the selected model(s), all models by default."""
         lower_model_selected = model_selected.lower() if model_selected else None
         file_to_open = os.path.join(self.base_path, self.project_dir, "target", Literal.MODELS_CATALOG.value)
-        with open(file_to_open) as json_file:
-            raw_load = json.load(json_file)
-            input_sources = {**raw_load[Literal.SOURCES.value], **raw_load[Literal.NODES.value]}
-            models_selected = [
-                content
-                for name, content in input_sources.items()
-                if (name.startswith(Literal.SOURCE.value) or name.startswith(Literal.MODEL.value)) and (
-                        (not lower_model_selected) or (content["metadata"]["name"].lower() == lower_model_selected))
-            ]
-            model_names = [model["metadata"]["name"] for model in models_selected]
-            logging.info(f"...Processing {len(models_selected)} models...")
-            if models_selected:
-                logging.info(f"{model_names}")
+        raw_load = SchemaBuilder.read_json(file_to_open)
+        input_sources = {**raw_load[Literal.SOURCES.value], **raw_load[Literal.NODES.value]}
+        models_selected = [
+            content
+            for name, content in input_sources.items()
+            if (name.startswith(Literal.SOURCE.value) or name.startswith(Literal.MODEL.value)) and (
+                    (not lower_model_selected) or (content["metadata"]["name"].lower() == lower_model_selected))
+        ]
+        model_names = [model["metadata"]["name"] for model in models_selected]
+        logging.info(f"...Processing {len(models_selected)} models...")
+        if models_selected:
+            logging.info(f"{model_names}")
 
-            return models_selected
+        return models_selected
 
     def build_yml_objs(self):
         """Appending the create yml objs from the model sources to process"""
