@@ -6,18 +6,28 @@ import json
 import os
 from typing import List, Dict
 
+import pytest
+
 from app.utils.create_schema_test import SchemaBuilder
 
 
-def test_all_models_selected(mocker):
+@pytest.fixture()
+def mocked_write_yaml(mocker):  # mocker is pytest-mock fixture
     mocker.patch(
         'app.utils.create_schema_test.SchemaBuilder.write_yaml',  # Do not write in disk for this test
         return_value=None
     )
+
+
+@pytest.fixture()
+def mocked_read_json(mocker):  # mocker is pytest-mock fixture
     mocker.patch(
         'app.utils.create_schema_test.SchemaBuilder.read_json',
         return_value=read_test_catalog()
     )
+
+
+def test_all_models_selected(mocked_write_yaml, mocked_read_json):
     project_dir = 'app/dbt_ingest'
     model = None
     update = True
@@ -29,15 +39,7 @@ def test_all_models_selected(mocker):
     assert output_models
 
 
-def test_single_model_selected(mocker):
-    mocker.patch(
-        'app.utils.create_schema_test.SchemaBuilder.write_yaml',  # Do not write in disk for this test
-        return_value=None
-    )
-    mocker.patch(
-        'app.utils.create_schema_test.SchemaBuilder.read_json',
-        return_value=read_test_catalog()
-    )
+def test_single_model_selected(mocked_write_yaml, mocked_read_json):
     project_dir = 'app/dbt_ingest'
     model = "company"
     update = True
@@ -50,15 +52,7 @@ def test_single_model_selected(mocker):
     assert len(output_models) == 1
 
 
-def test_single_model_selected_schema(mocker):
-    mocker.patch(
-        'app.utils.create_schema_test.SchemaBuilder.write_yaml',  # Do not write in disk for this test
-        return_value=None
-    )
-    mocker.patch(
-        'app.utils.create_schema_test.SchemaBuilder.read_json',
-        return_value=read_test_catalog()
-    )
+def test_single_model_selected_schema(mocked_write_yaml, mocked_read_json):
     project_dir = 'app/dbt_ingest'
     model = "company"
     update = True
