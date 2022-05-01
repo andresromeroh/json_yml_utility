@@ -17,11 +17,6 @@ from ruamel.yaml.comments import (
 
 INDENTATION: int = 2
 
-SOURCES: Dict = {
-    "MODELS_METADATA": "catalog.json",
-    "MODELS_PATH": "manifest.json",
-}
-
 
 class Literal(enum.Enum):
     MODEL = "model"
