@@ -81,9 +81,8 @@ class SchemaBuilder(object):
             Parse the manifest.json file and return only the models selected (or all models if model_selected is None).
             @DEPRECATED, USE SchemaBuilder.build_models_paths()
         """
-        with open(
-                os.path.join(self.base_path, self.project_dir, "target", Literal.MODELS_MANIFEST.value)
-        ) as json_file:
+        file_to_open = os.path.join(self.base_path, self.project_dir, "target", Literal.MODELS_MANIFEST.value)
+        with open(file_to_open) as json_file:
             manifest_nodes = json.load(json_file)[Literal.NODES.value]
             return [
                 content

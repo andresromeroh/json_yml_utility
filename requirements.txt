@@ -3,3 +3,4 @@ ruamel.yaml==0.17.4
 tabulate==0.8.9
 pytest==7.1.2
 pytest-cov==3.0.0
+pytest-mock==3.7.0
