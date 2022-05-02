@@ -4,7 +4,7 @@ Read from JSON file, generate schema_test.yml from SQL models based on their met
 
 ## How to run it
 ```shell
-python -pd /app -m company -u
+python -pd /app/dbt_ingest -m company -u
 
 # pd: project directory -> default '/app'
 # m: model -> default None

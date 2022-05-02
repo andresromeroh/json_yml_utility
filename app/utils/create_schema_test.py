@@ -327,7 +327,7 @@ class SchemaBuilder(object):
 @click.option(
     "--project-dir",
     "-pd",
-    default="/app/dbt_transform",
+    default="/app/dbt_ingest",
     help=(
             "The path to the dbt project for which to generate schema tests. \
             The default is dbt_transform."
