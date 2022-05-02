@@ -97,7 +97,6 @@ class SchemaBuilder(object):
         lower_model_selected = model_selected.lower() if model_selected else None
         # file_to_open = os.path.join(self.base_path, self.project_dir, "target", Literal.MODELS_CATALOG.value)
         file_to_open = os.path.abspath(f"{self.base_path}/{self.project_dir}/target/{Literal.MODELS_CATALOG.value}")
-        logging.info(file_to_open)
         raw_load = SchemaBuilder.read_json(file_to_open)
         input_sources = {**raw_load[Literal.SOURCES.value], **raw_load[Literal.NODES.value]}
         models_selected = [
