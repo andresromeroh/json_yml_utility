@@ -28,6 +28,9 @@ def mocked_read_json(mocker):  # mocker is pytest-mock fixture
 
 
 def test_all_models_selected(mocked_write_yaml, mocked_read_json):
+    """
+    Testing all models generated
+    """
     project_dir = 'app/dbt_ingest'
     model = None
     update = True
@@ -36,23 +39,27 @@ def test_all_models_selected(mocked_write_yaml, mocked_read_json):
     )
     builder.start()
     output_models: List = builder.models
+    model_names = ['CONNECTEVENTWORKFLOWSOURCE', 'PERSON', 'ROOM', 'CONNECTEVENTWORKFLOW', 'SUBMITTAL', 'TALENTPOOL',
+                   'CONNECTEVENT', 'COMPANY', 'SOURCEWORKFLOW', 'WORKDAY_TRANSACTIONS', 'WORKDAY_SUPPLIERS',
+                   'WORKDAY_JOB_PROFILES',
+                   'WORKDAY_CUSTOM_ORGANIZATIONS', 'WORKDAY_COMPANIES', 'FORM_BUILDER_FORM_HISTORY',
+                   'CKAPP_FUNCTION_HISTORY', 'FEEDBACK_EMPLOYEEPTLSNAPSHOT_HISTORY', 'CKAPP_RUBRIC_HISTORY',
+                   'CKAPP_ROLE_HISTORY',
+                   'CKAPP_ORGANIZATION_HISTORY', 'CKAPP_LEVEL_HISTORY', 'CKAPP_DIMENSION_HISTORY',
+                   'FEEDBACK_ROUND_HISTORY', 'WORKDAY_COST_CENTERS',
+                   'WORKDAY_LOCATIONS', 'WORKDAY_LOCATIONS_HIERARCHY', 'WORKDAY_SUPERVISORY_ORGANIZATIONS',
+                   'FEEDBACK_EMPLOYEE_PTL_SNAPSHOT', 'FEEDBACK_FORM_BUILDER_FORM', 'FEEDBACK_FUNCTION',
+                   'FEEDBACK_LEVEL', 'FEEDBACK_ORGANIZATION', 'FEEDBACK_ROLE', 'FEEDBACK_ROUND', 'FEEDBACK_RUBRIC',
+                   'WORKDAY_JOB_PROFILES',
+                   'FEEDBACK_DIMENSION']
     assert output_models
+    assert [model['models'][0]['name'] for model in output_models] == model_names
 
 
 def test_single_model_selected(mocked_write_yaml, mocked_read_json):
-    project_dir = 'app/dbt_ingest'
-    model = "company"
-    update = True
-    builder = SchemaBuilder(
-        project_dir=project_dir, model_selected=model, update=update
-    )
-    builder.start()
-    output_models: List = builder.models
-    assert output_models
-    assert len(output_models) == 1
-
-
-def test_single_model_selected_schema(mocked_write_yaml, mocked_read_json):
+    """
+    Testing only one selected model: COMPANY
+    """
     project_dir = 'app/dbt_ingest'
     model = "company"
     update = True
@@ -67,6 +74,26 @@ def test_single_model_selected_schema(mocked_write_yaml, mocked_read_json):
     model_selected = model['models'][0]
     assert model_selected['name'] == 'COMPANY'
     assert model_selected['description'] == 'RAW TABLE FOR ICIMS COMPANY'
+
+
+def test_single_model_selected_schema(mocked_write_yaml, mocked_read_json):
+    """
+    Testing only one selected model:FEEDBACK_LEVEL and schema validation
+    """
+    project_dir = 'app/dbt_ingest'
+    model = "FEEDBACK_LEVEL"
+    update = True
+    builder = SchemaBuilder(
+        project_dir=project_dir, model_selected=model, update=update
+    )
+    builder.start()
+    output_models: List = builder.models
+    assert output_models
+    assert len(output_models) == 1
+    model = output_models[0]
+    model_selected = model['models'][0]
+    assert model_selected['name'] == 'FEEDBACK_LEVEL'
+    assert model_selected['description'] is None
 
     for test in model_selected['test']:
         assert test['dbt_utils.recency']
@@ -83,7 +110,8 @@ def test_single_model_selected_schema(mocked_write_yaml, mocked_read_json):
     assert model_selected['meta']['data_quality']
 
     for column in model_selected['columns']:
-        assert column['name'] in ['RAW_DATA', 'RAW_INSERTED_TIMESTAMP', 'RAW_FILENAME']
+        assert column['name'] in ['LEVEL_KEY', 'ID', 'NAME', 'DESCRIPTION', 'RUBRIC_ID', 'SEQ', 'IS_SPECIFIED',
+                                  'ETL_UPDATED_TIMESTAMP', 'IS_DELETED_IN_SOURCE', 'TIMESTAMP_EFFECTIVE', 'ROW_HASH']
         assert column['description'] is None
         assert column['tests'] is not None
         assert column['meta'] is not None
